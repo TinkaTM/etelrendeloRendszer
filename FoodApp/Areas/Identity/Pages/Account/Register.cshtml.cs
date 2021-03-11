@@ -11,6 +11,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.Extensions.Logging;
 
@@ -64,6 +65,7 @@ namespace FoodApp.Areas.Identity.Pages.Account
             [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
             public string ConfirmPassword { get; set; }
             public string Name { get; set; }
+
         }
 
         public async Task OnGetAsync(string returnUrl = null)
@@ -75,6 +77,7 @@ namespace FoodApp.Areas.Identity.Pages.Account
 
         public async Task<IActionResult> OnPostAsync(string returnUrl = null)
         {
+            ViewData["roles"] = _roleManager.Roles.ToList();
             returnUrl = returnUrl ?? Url.Content("~/");
             var role = _roleManager.FindByIdAsync(Input.Name).Result;
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
