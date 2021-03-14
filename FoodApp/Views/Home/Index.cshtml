@@ -2,12 +2,12 @@
 @inject IAuthorizationService AuthorizationService
 
 @{
-    ViewData["Title"] = "Home Page";
+    ViewData["Title"] = "Kezdőképernyő";
 }
 
 <div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core with a little bit of szerencsétlenség.</a>.</p>
-    @if ((await AuthorizationService.AuthorizeAsync(User, "Étteremeknek")).Succeeded) { <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core with a little bit of szerencsétlenség.</a>.</p>}
+    <h1 class="display-4">Ételrendelés</h1>
+    <p>A weboldalon ételrendeléssel kapcsolatos ügyeket tud intézni.</p>
+    @if ((await AuthorizationService.AuthorizeAsync(User, "Étteremeknek")).Succeeded) { <p>Valamit csak írok ide is.</p>}
     
 </div>
