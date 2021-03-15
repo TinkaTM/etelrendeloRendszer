@@ -4,28 +4,32 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
+<h1>Étlap kezelés</h1>
 
 <p>
-    <a asp-action="Create">Create New</a>
+    <a asp-action="Create">Új étel hozzáadása</a>
 </p>
+<p>
+    <a class="nav-link text-dark" asp-area="" asp-controller="Etlaps" asp-action="ShowSearchForm">Keresés</a>
+</p>
+
 <table class="table">
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Kategoria)
+                Név
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Nev)
+                Kategória
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Ar)
+                Ár
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Allergen)
+               Allergén
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Leiras)
+                Leírás
             </th>
             <th></th>
         </tr>
@@ -34,13 +38,13 @@
 @foreach (var item in Model) {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.Kategoria)
-            </td>
-            <td>
                 @Html.DisplayFor(modelItem => item.Nev)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Ar)
+                @Html.DisplayFor(modelItem => item.Kategoria)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Ar) Ft
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Allergen)
@@ -49,9 +53,9 @@
                 @Html.DisplayFor(modelItem => item.Leiras)
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.ID">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.ID">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.ID">Delete</a>
+                <a asp-action="Edit" asp-route-id="@item.ID">Módosítás</a> |
+                <a asp-action="Details" asp-route-id="@item.ID">Részletek</a> |
+                <a asp-action="Delete" asp-route-id="@item.ID">Törlés</a>
             </td>
         </tr>
 }
