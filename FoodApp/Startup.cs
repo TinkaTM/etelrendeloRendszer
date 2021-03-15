@@ -66,6 +66,7 @@ namespace FoodApp
             services.AddAuthorization(
                     options => {
                         options.AddPolicy("Étteremeknek", policy => policy.RequireRole("Étterem"));
+                        options.AddPolicy("Vendégeknek", policy => policy.RequireRole("Vendég"));
                     }
                 );
         }

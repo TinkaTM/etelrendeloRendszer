@@ -8,24 +8,41 @@ using Microsoft.EntityFrameworkCore;
 using FoodApp.Data;
 using FoodApp.Models;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 
 namespace FoodApp.Controllers
 {
     public class EtlapsController : Controller
     {
         private readonly ApplicationDbContext _context;
+        private readonly UserManager<IdentityUser> _userManager;
 
-        public EtlapsController(ApplicationDbContext context)
+        public EtlapsController(ApplicationDbContext context, UserManager<IdentityUser> userManager)
         {
             _context = context;
+            _userManager = userManager;
         }
 
         // GET: Etlaps
-        [Authorize(Roles="Étterem")]
+        [Authorize(Roles = "Étterem,Vendég")]
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Etlap.ToListAsync());
+            List<Etlap> Etlaps = await _context.Etlap.ToListAsync();
+            var user = await _userManager.GetUserAsync(HttpContext.User);
+            if (User.IsInRole("Étterem"))
+            {
+                Etlaps.RemoveAll(etlap =>
+                {
+                    if (etlap.IdentityUser != null)
+                    {
+                        return etlap.IdentityUser.Id != user.Id;
+                    }
+                    else return true;
+                });
+            }
+            return View(Etlaps);
         }
+
 
         // GET: Etlaps/SHowSearchForm
         public async Task<IActionResult> ShowSearchForm()
@@ -72,8 +89,10 @@ namespace FoodApp.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("ID,Kategoria,Nev,Ar,Allergen,Leiras")] Etlap etlap)
         {
+            var user = await _userManager.GetUserAsync(HttpContext.User);
             if (ModelState.IsValid)
             {
+                etlap.IdentityUser = user;
                 _context.Add(etlap);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
