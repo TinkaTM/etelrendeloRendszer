@@ -25,6 +25,20 @@ namespace FoodApp.Controllers
             return View(await _context.Etlap.ToListAsync());
         }
 
+        // GET: Etlaps/SHowSearchForm
+        public async Task<IActionResult> ShowSearchForm()
+        {
+            return View();
+        }
+
+        // POST: Etlaps/SHowSearchForm
+        public async Task<IActionResult> ShowSearchResults(String SearchPhrase)
+        {
+            return View("Index",await _context.Etlap.Where(j=> j.Nev.Contains(SearchPhrase)).ToListAsync());
+        }
+
+
+
         // GET: Etlaps/Details/5
         public async Task<IActionResult> Details(int? id)
         {
