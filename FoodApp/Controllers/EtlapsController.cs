@@ -21,7 +21,7 @@ namespace FoodApp.Controllers
         }
 
         // GET: Etlaps
-        [Authorize]
+        [Authorize(Roles="Étterem")]
         public async Task<IActionResult> Index()
         {
             return View(await _context.Etlap.ToListAsync());
