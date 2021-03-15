@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using FoodApp.Data;
 using FoodApp.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace FoodApp.Controllers
 {
@@ -20,6 +21,7 @@ namespace FoodApp.Controllers
         }
 
         // GET: Etlaps
+        [Authorize]
         public async Task<IActionResult> Index()
         {
             return View(await _context.Etlap.ToListAsync());
