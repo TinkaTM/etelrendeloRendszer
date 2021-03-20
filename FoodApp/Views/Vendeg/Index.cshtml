@@ -1,0 +1,18 @@
+﻿@model IEnumerable<FoodApp.Models.EtteremCim>
+
+@{
+    ViewData["Title"] = "Éttermek";
+}
+
+@foreach (var item in Model) 
+{ 
+    <div class="card">
+    <div class="card-body">
+        <h5 class="card-title">@Html.DisplayFor(modelItem => item.EtteremNev)</h5>
+        <h6 class="card-subtitle mb-2 text-muted">Nyitvatartás: @Html.DisplayFor(modelItem => item.Nyitas) - @Html.DisplayFor(modelItem => item.Zaras)</h6>
+        <p class="card-text">Cím: @Html.DisplayFor(modelItem => item.Iranyitoszam), @Html.DisplayFor(modelItem => item.Varos) <br> @Html.DisplayFor(modelItem => item.Cim)</p>
+        <a href="#" class="card-link">Card link</a>
+    </div>
+</div>
+<br> 
+}

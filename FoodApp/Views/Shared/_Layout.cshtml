@@ -29,12 +29,27 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Adatvédelem</a>
                         </li>
-                        @if ((await AuthorizationService.AuthorizeAsync(User, "Étteremeknek")).Succeeded || (await AuthorizationService.AuthorizeAsync(User, "Vendégeknek")).Succeeded)
+                        @if ((await AuthorizationService.AuthorizeAsync(User, "Étteremeknek")).Succeeded)
                         {
                             <li class="nav-item">
-                               <a class="nav-link text-dark" asp-area="" asp-controller="Etlaps" asp-action="Index">Étlap kezelés</a>
-                            </li> 
-                            } 
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Etlaps" asp-action="Index">Étlap kezelés</a>
+                            </li>
+
+                        }
+                        @if ((await AuthorizationService.AuthorizeAsync(User, "Étteremeknek")).Succeeded)
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="EtteremCims" asp-action="CimKezel">Cím kezelés</a>
+                            </li>
+
+                        }
+                        @if ((await AuthorizationService.AuthorizeAsync(User, "Vendégeknek")).Succeeded)
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Vendeg" asp-action="Index">Éttermek</a>
+                            </li>
+
+                        }
                     </ul>
                 </div>
             </div>
