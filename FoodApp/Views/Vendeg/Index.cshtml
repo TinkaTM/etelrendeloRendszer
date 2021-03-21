@@ -11,7 +11,7 @@
         <h5 class="card-title">@Html.DisplayFor(modelItem => item.EtteremNev)</h5>
         <h6 class="card-subtitle mb-2 text-muted">Nyitvatartás: @Html.DisplayFor(modelItem => item.Nyitas) - @Html.DisplayFor(modelItem => item.Zaras)</h6>
         <p class="card-text">Cím: @Html.DisplayFor(modelItem => item.Iranyitoszam), @Html.DisplayFor(modelItem => item.Varos) <br> @Html.DisplayFor(modelItem => item.Cim)</p>
-        <a href="#" class="card-link">Card link</a>
+        <a asp-action="Etlap" asp-route-id="@item.ID" class="card-link">Étlap</a>
     </div>
 </div>
 <br> 

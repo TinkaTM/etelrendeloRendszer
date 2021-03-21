@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -16,6 +17,7 @@ namespace FoodApp.Models
         public string Allergen { get; set; }
         public string Leiras { get; set; }
         public string UserId { get; set; }
+        [ForeignKey("UserId")]
         public virtual IdentityUser IdentityUser { get; set; }
         public Etlap()
         {
