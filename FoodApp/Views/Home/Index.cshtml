@@ -8,6 +8,14 @@
 <div class="text-center">
     <h1 class="display-4">Ételrendelés</h1>
     <p>A weboldalon ételrendeléssel kapcsolatos ügyeket tud intézni.</p>
-    @if ((await AuthorizationService.AuthorizeAsync(User, "Étteremeknek")).Succeeded) { <p>Valamit csak írok ide is.</p>}
-    
+    @if ((await AuthorizationService.AuthorizeAsync(User, "Étteremeknek")).Succeeded)
+    {<p>Étteremként van bejelentkezve.</p>}
+</div>
+<div class="text-center">
+    @if ((await AuthorizationService.AuthorizeAsync(User, "Vendégeknek")).Succeeded)
+    {<p>Vendégként van bejelentkezve.</p>}
+</div>
+<div class="text-center">
+    @if ((await AuthorizationService.AuthorizeAsync(User, "Futároknak")).Succeeded)
+    {<p>Futárként van bejelentkezve.</p>}
 </div>

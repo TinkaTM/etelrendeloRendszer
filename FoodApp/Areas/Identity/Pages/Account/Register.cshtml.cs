@@ -51,18 +51,18 @@ namespace FoodApp.Areas.Identity.Pages.Account
         {
             [Required]
             [EmailAddress]
-            [Display(Name = "Email")]
+            [Display(Name = "E-mail cím: ")]
             public string Email { get; set; }
 
             [Required]
             [StringLength(100, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 6)]
             [DataType(DataType.Password)]
-            [Display(Name = "Password")]
+            [Display(Name = "Jelszó:")]
             public string Password { get; set; }
 
             [DataType(DataType.Password)]
-            [Display(Name = "Confirm password")]
-            [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
+            [Display(Name = "Erősítse meg a jelszavát!")]
+            [Compare("Password", ErrorMessage = "A kettő jelszó nem egyezik!")]
             public string ConfirmPassword { get; set; }
             public string Name { get; set; }
 
@@ -87,7 +87,7 @@ namespace FoodApp.Areas.Identity.Pages.Account
                 var result = await _userManager.CreateAsync(user, Input.Password);
                 if (result.Succeeded)
                 {
-                    _logger.LogInformation("User created a new account with password.");
+                    _logger.LogInformation("Új felhasználó létrehozva.");
                     await _userManager.AddToRoleAsync(user, role.Name);
 
                     var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);

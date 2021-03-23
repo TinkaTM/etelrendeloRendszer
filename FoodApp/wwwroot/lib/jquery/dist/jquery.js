@@ -2742,7 +2742,7 @@ function matcherFromGroupMatchers( elementMatchers, setMatchers ) {
 			// no element matchers and no seed.
 			// Incrementing an initially-string "0" `i` allows `i` to remain a string only in that
 			// case, which will result in a "00" `matchedCount` that differs from `i` but is also
-			// numerically zero.
+			// numerically zero
 			if ( bySet && i !== matchedCount ) {
 				j = 0;
 				while ( ( matcher = setMatchers[ j++ ] ) ) {
