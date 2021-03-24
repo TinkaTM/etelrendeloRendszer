@@ -123,6 +123,7 @@ namespace FoodApp.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("ID,Kategoria,Nev,Ar,Allergen,Leiras")] Etlap etlap)
         {
+            var user = await _userManager.GetUserAsync(HttpContext.User);
             if (id != etlap.ID)
             {
                 return NotFound();
@@ -132,6 +133,7 @@ namespace FoodApp.Controllers
             {
                 try
                 {
+                    etlap.IdentityUser = user;
                     _context.Update(etlap);
                     await _context.SaveChangesAsync();
                 }
