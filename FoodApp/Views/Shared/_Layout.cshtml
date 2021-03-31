@@ -45,7 +45,7 @@
                             </li>
 
                         }
-                        @if ((await AuthorizationService.AuthorizeAsync(User, "Vendégeknek")).Succeeded)
+                        @if (!((await AuthorizationService.AuthorizeAsync(User, "Futároknak")).Succeeded || (await AuthorizationService.AuthorizeAsync(User, "Étteremeknek")).Succeeded ))
                         {
                             <li class="nav-item">
                                 <a class="nav-link text-dark" asp-area="" asp-controller="Vendeg" asp-action="Index">Éttermek</a>
