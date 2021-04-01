@@ -16,5 +16,6 @@ namespace FoodApp.Data
         public DbSet<FoodApp.Models.Food> Food { get; set; }
         public DbSet<FoodApp.Models.Etlap> Etlap { get; set; }
         public DbSet<FoodApp.Models.EtteremCim> EtteremCim { get; set; }
+        public DbSet<FoodApp.Models.KocsiItem> KocsiItem { get; set; }
     }
 }

@@ -4,14 +4,16 @@ using FoodApp.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace FoodApp.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210401081325_cartitem")]
+    partial class cartitem
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -102,29 +104,6 @@ namespace FoodApp.Data.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Food");
-                });
-
-            modelBuilder.Entity("FoodApp.Models.KocsiItem", b =>
-                {
-                    b.Property<int>("KocsiItemId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int>("Darab")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("EtelID")
-                        .HasColumnType("int");
-
-                    b.Property<string>("KocsiId")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("KocsiItemId");
-
-                    b.HasIndex("EtelID");
-
-                    b.ToTable("KocsiItem");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -339,13 +318,6 @@ namespace FoodApp.Data.Migrations
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", "IdentityUser")
                         .WithMany()
                         .HasForeignKey("UserId");
-                });
-
-            modelBuilder.Entity("FoodApp.Models.KocsiItem", b =>
-                {
-                    b.HasOne("FoodApp.Models.Etlap", "Etel")
-                        .WithMany()
-                        .HasForeignKey("EtelID");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

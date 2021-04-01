@@ -45,8 +45,8 @@
                     @Html.DisplayFor(modelItem => item.Leiras)
                 </td>
                 <td>
-                    <a>Módosítás</a> 
-                </td>
+                    <a class="btn btn-success" id="cartButton" asp-controller="Kocsi" asp-action="AddToKocsi" asp-route-id="@item.ID">Kosárba</a>
+</td>
             </tr>
         }
     </tbody>
