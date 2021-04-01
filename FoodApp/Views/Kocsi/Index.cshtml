@@ -1,7 +1,7 @@
 ﻿@model FoodApp.ViewModels.KocsiViewModel
 
 <div class="row checkoutForm">
-    <h2>Your shopping cart</h2>
+    <h2>Your shopping cart</h2><br>
     <h4>Here are the drinks in your shopping cart.</h4>
     <table class="table table-bordered table-striped">
         <thead>
@@ -23,7 +23,7 @@
                     <td class="text-right">
                         @((line.Darab * line.Etel.Ar).ToString("c"))
                     </td>
-                    <td class="text-center"><a class="glyphicon glyphicon-remove text-danger remove" asp-controller="ShoppingCart" asp-action="RemoveFromShoppingCart" asp-route-drinkId="@line.Etel.ID"></a></td>
+                    <td class="text-center"><a class="btn btn-primary" asp-controller="Kocsi" asp-action="DeleteFromKocsi" asp-route-id="@line.Etel.ID">Törlés</a></td>
                 </tr>
             }
         </tbody>
@@ -39,16 +39,7 @@
 
     <div class="text-right">
         <div class="btn-group ">
-            <a class="btn btn-success" asp-controller="Order" asp-action="Checkout">Check out</a>
-            <a class="btn-group">
-                <a class="btn btn-default dropdown-toggle" data-toggle="dropdown">
-                    Add more drinks<span class="caret"></span>
-                </a>
-                <ul class="dropdown-menu" role="menu">
-                    <li><a asp-controller="Drink" asp-action="List" asp-route-category="Alcoholic">Alcoholic</a></li>
-                    <li><a asp-controller="Drink" asp-action="List" asp-route-category="Non-alcoholic">Non Alcoholic</a></li>
-                </ul>
-            </a>
+            <a class="btn btn-success" asp-controller="Order" asp-action="Checkout">Check out(not working)</a>
         </div>
     </div>
 </div>
