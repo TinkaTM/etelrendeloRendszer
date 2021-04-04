@@ -55,7 +55,7 @@ namespace FoodApp.Models
         {
             var KocsiItem = _context.KocsiItem.SingleOrDefault(s => s.Etel.ID == etel.ID && s.KocsiId == KocsiId);
             var localAmount = 0;
-            if(KocsiItem != null)
+            if (KocsiItem != null)
             {
                 if (KocsiItem.Darab > 1)
                 {
@@ -84,6 +84,15 @@ namespace FoodApp.Models
         {
             var total = _context.KocsiItem.Where(c => c.KocsiId == KocsiId).Select(c => c.Etel.Ar * c.Darab).Sum();
             return total;
+        }
+        public void RemoveAllFromKocsi(Etlap etel)
+        {
+            var KocsiItem = _context.KocsiItem.SingleOrDefault(s => s.Etel.ID == etel.ID && s.KocsiId == KocsiId);
+            if (KocsiItem != null)
+            {
+                _context.KocsiItem.Remove(KocsiItem);
+            }
+            _context.SaveChanges();
         }
     }
 }

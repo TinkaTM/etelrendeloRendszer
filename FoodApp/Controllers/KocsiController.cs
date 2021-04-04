@@ -49,5 +49,14 @@ namespace FoodApp.Controllers
             }
             return RedirectToAction("Index");
         }
+        public RedirectToActionResult DeleteAll(int id)
+        {
+            var etel = _context.Etlap.Find(id);
+            if (etel != null)
+            {
+                _kocsi.RemoveAllFromKocsi(etel);
+            }
+            return RedirectToAction("Index");
+        }
     }
 }
