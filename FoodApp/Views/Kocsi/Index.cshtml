@@ -1,5 +1,6 @@
 ﻿@model FoodApp.ViewModels.KocsiViewModel
-
+@using Microsoft.AspNetCore.Identity
+@inject SignInManager<IdentityUser> SignInManager
 <div class="row checkoutForm">
     <h2>Your shopping cart</h2><br>
     <h4>Here are the drinks in your shopping cart.</h4>
@@ -43,7 +44,15 @@
 
     <div class="text-right">
         <div class="btn-group ">
-            <a class="btn btn-success" asp-controller="Order" asp-action="Checkout">Check out(not working)</a>
+            @if (SignInManager.IsSignedIn(User))
+            {
+                <a class="btn btn-success" asp-controller="Order" asp-action="Checkout">Check out(not working)</a>
+            }
+            else 
+            { 
+                <a class="btn btn-success" asp-controller="Order" asp-action="Checkout">Check out(not working) Vendegként</a>
+            }
+
         </div>
     </div>
 </div>
