@@ -35,13 +35,15 @@ namespace FoodApp.Models
         public void AddToCart(Etlap etel, int db)
         {
             var KocsiItem = _context.KocsiItem.SingleOrDefault(s => s.Etel.ID == etel.ID && s.KocsiId == KocsiId);
+            var etteremid = _context.EtteremCim.SingleOrDefault(s => s.UserId == etel.UserId).ID;
             if (KocsiItem == null)
             {
                 KocsiItem = new KocsiItem
                 {
                     KocsiId = KocsiId,
                     Etel = etel,
-                    Darab = 1
+                    Darab = 1,
+                    EtteremCimId = etteremid
                 };
                 _context.KocsiItem.Add(KocsiItem);
             }
