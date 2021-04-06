@@ -1,0 +1,23 @@
+﻿@model IEnumerable<FoodApp.Models.VendegCim>
+
+<div class="row">
+    <div class="container-fluid">
+        <form asp-action="Rendeles">
+            <div class="btn-group-vertical" role="group">
+                @foreach (var item in Model)
+                {
+                    <label class="btn btn-outline-primary">
+                            <input class="btn-check" type="radio" name="Cimid" value="@item.VendegCimId" checked />
+                    @item.KeresztNev @item.VezetekNev @item.Varos 
+                    </label>
+                 }
+            </div>
+            <br>
+            <a asp-controller="VendegCims" asp-action="Create">Új cím</a>
+            <br>
+            <div class="form-group">
+                <input type="submit" value="Rendel" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>

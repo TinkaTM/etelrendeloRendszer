@@ -14,7 +14,6 @@ namespace FoodApp.Models
         public string Cim { get; set; }
         public string Email { get; set; }
         public string Telefonszam { get; set; }
-        public int RendelesTotal { get; set; }
         public DateTime RendelesIdo { get; set; }
     }
 }

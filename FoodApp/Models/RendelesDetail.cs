@@ -11,7 +11,6 @@ namespace FoodApp.Models
         public int RendelesId { get; set; }
         public int EtlapId { get; set; }
         public int Darab { get; set; }
-        public int Ar { get; set; }
         public virtual Etlap Etlap { get; set; }
         public virtual Rendeles Rendeles { get; set; }
         public int EtteremCimId { get; set; }
