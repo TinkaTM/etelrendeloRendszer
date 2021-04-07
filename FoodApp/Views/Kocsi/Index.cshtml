@@ -25,7 +25,7 @@
                     <td class="text-center">
                         <span><a asp-controller="Kocsi" asp-action="DeleteFromKocsi" asp-route-id="@line.Etel.ID">-</a></span>
                         <span>@line.Darab</span>
-                        <span><a asp-controller="Kocsi" asp-action="AddtoKocsi" asp-route-id="@line.Etel.ID">+</a></span>
+                        <span><a asp-controller="Kocsi" asp-action="AddOnetoKocsi" asp-route-id="@line.Etel.ID">+</a></span>
                     </td>
                     <td class="text-left">@line.Etel.Nev</td>
                     <td class="text-right">@line.Etel.Ar.ToString("c")</td>

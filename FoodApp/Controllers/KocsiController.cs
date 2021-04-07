@@ -38,11 +38,12 @@ namespace FoodApp.Controllers
         public RedirectToActionResult AddtoKocsi(int id)
         {
             var etel = _context.Etlap.Find(id);
-            if (etel != null) 
+            if (etel != null)
             {
                 _kocsi.AddToCart(etel, 1);
             }
-            return RedirectToAction("Index");
+            int etteremid = _context.EtteremCim.Where(s => s.UserId == etel.UserId).FirstOrDefault().ID;
+            return RedirectToAction("Etlap", "Vendeg", new { id = etteremid, alert = "alert alert-success alert-dismissible show" });
         }
         public RedirectToActionResult DeleteFromKocsi(int id)
         {
@@ -59,6 +60,15 @@ namespace FoodApp.Controllers
             if (etel != null)
             {
                 _kocsi.RemoveAllFromKocsi(etel);
+            }
+            return RedirectToAction("Index");
+        }
+        public RedirectToActionResult AddOnetoKocsi(int id)
+        {
+            var etel = _context.Etlap.Find(id);
+            if (etel != null)
+            {
+                _kocsi.AddToCart(etel, 1);
             }
             return RedirectToAction("Index");
         }

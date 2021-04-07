@@ -23,8 +23,9 @@ namespace FoodApp.Controllers
         {
             return View(await _context.EtteremCim.ToListAsync());
         }
-        public async Task<IActionResult> Etlap(int? id)
+        public async Task<IActionResult> Etlap(int id, string alert)
         {
+            ViewBag.AlertClass = alert;
             var userId = _context.EtteremCim.FindAsync(id).Result.UserId;
             var etlap = await _context.Etlap.Where(etlap => etlap.UserId == userId).ToListAsync();
             return View(etlap);
