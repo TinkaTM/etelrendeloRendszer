@@ -46,11 +46,11 @@
         <div class="btn-group ">
             @if (SignInManager.IsSignedIn(User))
             {
-                <a class="btn btn-success" asp-controller="Order" asp-action="Checkout">Check out(not working)</a>
+                <a class="btn btn-success" asp-controller="Rendeles" asp-action="Rendeles">Rendelés</a>
             }
             else 
             { 
-                <a class="btn btn-success" asp-controller="Order" asp-action="Checkout">Check out(not working) Vendegként</a>
+                <a class="btn btn-success" asp-controller="Rendeles" asp-action="RendelesVendeg">Rendelés Vendegként</a>
             }
 
         </div>

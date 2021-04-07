@@ -23,10 +23,16 @@ namespace FoodApp.Controllers
         }
         public IActionResult RendelesVendeg()
         {
+            var items = _kocsi.GetKocsiItems();
+            _kocsi.KocsiItems = items;
+            if (items.Count == 0) return RedirectToAction("Index", "Kocsi");
             return View();
         }
         public async Task<IActionResult> Rendeles()
         {
+            var items = _kocsi.GetKocsiItems();
+            _kocsi.KocsiItems = items;
+            if (items.Count == 0) return RedirectToAction("Index", "Kocsi");
             var user = await _userManager.GetUserAsync(HttpContext.User);
             var applicationDbContext = _context.VendegCim.Where(c => c.UserId == user.Id);
             return View(applicationDbContext.ToList());
@@ -35,11 +41,15 @@ namespace FoodApp.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult RendelesVendeg([Bind("RendelesId,VezetekNev,KeresztNev,Varos,Iranyitoszam,Cim,Email,Telefonszam")] Rendeles rendeles)
         {
+            var items = _kocsi.GetKocsiItems();
+            _kocsi.KocsiItems = items;
             if (ModelState.IsValid)
             {
                 rendeles.RendelesIdo = DateTime.Now;
-                var items = _kocsi.GetKocsiItems();
-                _kocsi.KocsiItems = items;
+                if (!HttpContext.Request.Cookies.ContainsKey("RendelesCookie") || HttpContext.Request.Cookies["RendelesCookie"] == null) {
+                    HttpContext.Response.Cookies.Append("RendelesCookie", Guid.NewGuid().ToString());
+                }
+                rendeles.UserCookie = HttpContext.Request.Cookies["RendelesCookie"];
                 _context.Rendeles.Add(rendeles);
                 _context.SaveChanges();
                 foreach (var item in items)
@@ -56,12 +66,14 @@ namespace FoodApp.Controllers
                 }
                 _kocsi.ClearKocsi();  
             }
-                return View();
+                return RedirectToAction("Index", "Home");
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult Rendeles(string Cimid) 
         {
+            var items = _kocsi.GetKocsiItems();
+            _kocsi.KocsiItems = items;
             var cim = _context.VendegCim.Where(c => c.VendegCimId == Int32.Parse(Cimid)).FirstOrDefault();
             Rendeles rendeles = new Rendeles
             {
@@ -74,8 +86,12 @@ namespace FoodApp.Controllers
                 Telefonszam = cim.Telefonszam
             };
             rendeles.RendelesIdo = DateTime.Now;
-            var items = _kocsi.GetKocsiItems();
-            _kocsi.KocsiItems = items;
+            if (!HttpContext.Request.Cookies.ContainsKey("RendelesCookie") || HttpContext.Request.Cookies["RendelesCookie"] == null)
+            {
+                HttpContext.Response.Cookies.Append("RendelesCookie", Guid.NewGuid().ToString());
+            }
+            rendeles.UserCookie = HttpContext.Request.Cookies["RendelesCookie"];
+           
             _context.Rendeles.Add(rendeles);
             _context.SaveChanges();
             foreach (var item in items)
@@ -91,7 +107,7 @@ namespace FoodApp.Controllers
                 _context.SaveChanges();
             }
             _kocsi.ClearKocsi();
-            return RedirectToAction("Rendeles", "Rendeles");
+            return RedirectToAction("Index", "Home");
         }
     }
 }

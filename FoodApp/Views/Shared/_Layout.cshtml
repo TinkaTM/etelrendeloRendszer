@@ -54,6 +54,12 @@
                                 <a class="nav-link text-dark" asp-area="" asp-controller="Kocsi" asp-action="Index">Kosár</a>
                             </li>
                         }
+                        @if ((await AuthorizationService.AuthorizeAsync(User, "Vendégeknek")).Succeeded)
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="VendegCims" asp-action="Index">Címek Kezelése</a>
+                            </li>
+                        }
                     </ul>
                 </div>
             </div>

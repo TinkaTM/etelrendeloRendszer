@@ -15,5 +15,6 @@ namespace FoodApp.Models
         public string Email { get; set; }
         public string Telefonszam { get; set; }
         public DateTime RendelesIdo { get; set; }
+        public string UserCookie { get; set; }
     }
 }
