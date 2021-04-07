@@ -19,8 +19,11 @@ namespace FoodApp.Controllers
             _context = context;
             _kocsi = kocsi;
         }
-
-        public ViewResult Index()
+        public RedirectToActionResult UresKocsi()
+        {
+            return RedirectToAction("Index", new { alert = "alert alert-warning alert-dismissible show" });
+        }
+        public ViewResult Index(string alert)
         {
             var items = _kocsi.GetKocsiItems();
             _kocsi.KocsiItems = items;
@@ -29,6 +32,7 @@ namespace FoodApp.Controllers
                 kocsi = _kocsi,
                 kocsiTotal = _kocsi.GetTotal()
             };
+            ViewBag.AlertClass = alert;
             return View(kocsiVM);
         }
         public RedirectToActionResult AddtoKocsi(int id)

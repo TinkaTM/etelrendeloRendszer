@@ -25,14 +25,14 @@ namespace FoodApp.Controllers
         {
             var items = _kocsi.GetKocsiItems();
             _kocsi.KocsiItems = items;
-            if (items.Count == 0) return RedirectToAction("Index", "Kocsi");
+            if (items.Count == 0) return RedirectToAction("UresKocsi", "Kocsi");
             return View();
         }
         public async Task<IActionResult> Rendeles()
         {
             var items = _kocsi.GetKocsiItems();
             _kocsi.KocsiItems = items;
-            if (items.Count == 0) return RedirectToAction("Index", "Kocsi");
+            if (items.Count == 0) return RedirectToAction("UresKocsi", "Kocsi");
             var user = await _userManager.GetUserAsync(HttpContext.User);
             var applicationDbContext = _context.VendegCim.Where(c => c.UserId == user.Id);
             return View(applicationDbContext.ToList());
