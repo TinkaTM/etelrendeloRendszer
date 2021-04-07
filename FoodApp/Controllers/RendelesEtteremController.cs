@@ -26,7 +26,9 @@ namespace FoodApp.Controllers
             List<RendelesEtteremViewModel> vms = new List<RendelesEtteremViewModel>();
             var user = await _userManager.GetUserAsync(HttpContext.User);
             var UserId = user.Id;
-            var Etteremid = _context.EtteremCim.Where(s => s.UserId == UserId).FirstOrDefault().ID;
+            var Etterem = _context.EtteremCim.Where(s => s.UserId == UserId).FirstOrDefault();
+            if (Etterem == null) return View(vms);
+            var Etteremid = Etterem.ID;
             var etelek = _context.RendelesDetail.Where(s => s.EtteremCimId == Etteremid).ToList();
             if(etelek.Count > 0)
             {
