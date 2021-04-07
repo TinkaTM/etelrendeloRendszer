@@ -27,9 +27,7 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Kezdőképernyő</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Adatvédelem</a>
-                        </li>
+
                         @if ((await AuthorizationService.AuthorizeAsync(User, "Étteremeknek")).Succeeded)
                         {
                             <li class="nav-item">
@@ -60,7 +58,7 @@
                         @if ((await AuthorizationService.AuthorizeAsync(User, "Vendégeknek")).Succeeded)
                         {
                             <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="VendegCims" asp-action="Index">Címek Kezelése</a>
+                                <a class="nav-link text-dark" asp-area="" asp-controller="VendegCims" asp-action="Index">Címeim</a>
                             </li>
                         }
                     </ul>

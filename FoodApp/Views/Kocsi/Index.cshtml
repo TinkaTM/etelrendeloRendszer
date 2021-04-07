@@ -1,16 +1,20 @@
 ﻿@model FoodApp.ViewModels.KocsiViewModel
 @using Microsoft.AspNetCore.Identity
+@{
+    ViewData["Title"] = "Kosár";
+}
+
 @inject SignInManager<IdentityUser> SignInManager
+<h1>Kosár </h1>
+<h4>Tételek a kosarában: </h4>
 <div class="row checkoutForm">
-    <h2>Your shopping cart</h2><br>
-    <h4>Here are the drinks in your shopping cart.</h4>
     <table class="table table-bordered table-striped">
         <thead>
             <tr>
-                <th>Selected amount</th>
-                <th>Drink</th>
-                <th class="text-right">Price</th>
-                <th class="text-right">Subtotal</th>
+                <th>Mennyiség</th>
+                <th>Tételek</th>
+                <th class="text-right">Ár</th>
+                <th class="text-right">Termékekre lebontva</th>
                 <th></th>
             </tr>
         </thead>
@@ -19,9 +23,9 @@
             {
                 <tr>
                     <td class="text-center">
-                        <span><a asp-controller="Kocsi" asp-action="AddtoKocsi" asp-route-id="@line.Etel.ID">+</a></span>
-                        <span>@line.Darab</span>
                         <span><a asp-controller="Kocsi" asp-action="DeleteFromKocsi" asp-route-id="@line.Etel.ID">-</a></span>
+                        <span>@line.Darab</span>
+                        <span><a asp-controller="Kocsi" asp-action="AddtoKocsi" asp-route-id="@line.Etel.ID">+</a></span>
                     </td>
                     <td class="text-left">@line.Etel.Nev</td>
                     <td class="text-right">@line.Etel.Ar.ToString("c")</td>
@@ -34,7 +38,7 @@
         </tbody>
         <tfoot>
             <tr>
-                <td colspan="3" class="text-right">Total:</td>
+                <td colspan="3" class="text-right">Összesen:</td>
                 <td class="text-right">
                     @Model.kocsiTotal.ToString("c")
                 </td>
@@ -50,12 +54,15 @@
             }
             else
             {
+
                 <a class="btn btn-success" asp-controller="Rendeles" asp-action="RendelesVendeg">Rendelés Vendegként</a>
+
             }
 
         </div>
     </div>
 </div>
+
 
 <br>
 <div class="@ViewBag.AlertClass fade" role="alert">
@@ -67,3 +74,8 @@
     <span aria-hidden="true">&times;</span>
 </button>
 </div>
+ 
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
+
