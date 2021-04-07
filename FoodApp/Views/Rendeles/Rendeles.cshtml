@@ -1,4 +1,7 @@
 ﻿@model IEnumerable<FoodApp.Models.VendegCim>
+@{
+    ViewData["Title"] = "Rendelés";
+}
 
 <div class="row">
     <div class="container-fluid">
@@ -7,16 +10,16 @@
                 @foreach (var item in Model)
                 {
                     <label class="btn btn-outline-primary">
-                            <input class="btn-check" type="radio" name="Cimid" value="@item.VendegCimId" checked />
-                    @item.KeresztNev @item.VezetekNev @item.Varos 
+                        <input class="btn-check" type="radio" name="Cimid" value="@item.VendegCimId" checked />
+                        @item.VezetekNev @item.KeresztNev; @item.Varos
                     </label>
-                 }
+                }
             </div>
             <br>
-            <a asp-controller="VendegCims" asp-action="Create">Új cím</a>
+            <a asp-controller="VendegCims" asp-action="Create">Új cím létrehozása!</a>
             <br>
             <div class="form-group">
-                <input type="submit" value="Rendel" class="btn btn-primary" />
+                <input type="submit" value="Megrendelem!" class="btn btn-primary" />
             </div>
         </form>
     </div>

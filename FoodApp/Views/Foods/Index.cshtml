@@ -1,13 +1,13 @@
 ﻿@model IEnumerable<FoodApp.Models.Food>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Cím létrehozása";
 }
 
-<h1>Index</h1>
+<h1>Címeim: </h1>
 
 <p>
-    <a asp-action="Create">Create New</a>
+    <a asp-action="Create">Új cím létrehozása!</a>
 </p>
 <table class="table">
     <thead>
@@ -31,9 +31,9 @@
                 @Html.DisplayFor(modelItem => item.Price) Ft
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                <a asp-action="Edit" asp-route-id="@item.Id">Módosítás</a> |
+                <a asp-action="Details" asp-route-id="@item.Id">Részletek</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id">Törlés</a>
             </td>
         </tr>
 }
