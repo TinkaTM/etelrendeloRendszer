@@ -72,6 +72,7 @@ namespace FoodApp.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult Rendeles(string Cimid) 
         {
+            if (Cimid == null) return RedirectToAction("Index", "Vendegcims");
             var items = _kocsi.GetKocsiItems();
             _kocsi.KocsiItems = items;
             var cim = _context.VendegCim.Where(c => c.VendegCimId == Int32.Parse(Cimid)).FirstOrDefault();
