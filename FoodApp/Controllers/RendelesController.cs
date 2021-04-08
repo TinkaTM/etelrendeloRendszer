@@ -23,6 +23,11 @@ namespace FoodApp.Controllers
         }
         public IActionResult RendelesVendeg()
         {
+            if (!HttpContext.Request.Cookies.ContainsKey("RendelesCookie") || HttpContext.Request.Cookies["RendelesCookie"] == null || HttpContext.Request.Cookies["RendelesCookie"] == "")
+            {
+                string cookieid = Guid.NewGuid().ToString();
+                HttpContext.Response.Cookies.Append("RendelesCookie", cookieid);
+            }
             var items = _kocsi.GetKocsiItems();
             _kocsi.KocsiItems = items;
             if (items.Count == 0) return RedirectToAction("UresKocsi", "Kocsi");
@@ -30,6 +35,11 @@ namespace FoodApp.Controllers
         }
         public async Task<IActionResult> Rendeles()
         {
+            if (!HttpContext.Request.Cookies.ContainsKey("RendelesCookie") || HttpContext.Request.Cookies["RendelesCookie"] == null || HttpContext.Request.Cookies["RendelesCookie"] == "")
+            {
+                string cookieid = Guid.NewGuid().ToString();
+                HttpContext.Response.Cookies.Append("RendelesCookie", cookieid);
+            }
             var items = _kocsi.GetKocsiItems();
             _kocsi.KocsiItems = items;
             if (items.Count == 0) return RedirectToAction("UresKocsi", "Kocsi");
@@ -46,10 +56,8 @@ namespace FoodApp.Controllers
             if (ModelState.IsValid)
             {
                 rendeles.RendelesIdo = DateTime.Now;
-                if (!HttpContext.Request.Cookies.ContainsKey("RendelesCookie") || HttpContext.Request.Cookies["RendelesCookie"] == null) {
-                    HttpContext.Response.Cookies.Append("RendelesCookie", Guid.NewGuid().ToString());
-                }
-                rendeles.UserCookie = HttpContext.Request.Cookies["RendelesCookie"];
+                var cookie = HttpContext.Request.Cookies["RendelesCookie"];
+                rendeles.UserCookie = cookie;
                 _context.Rendeles.Add(rendeles);
                 _context.SaveChanges();
                 foreach (var item in items)
@@ -87,11 +95,8 @@ namespace FoodApp.Controllers
                 Telefonszam = cim.Telefonszam
             };
             rendeles.RendelesIdo = DateTime.Now;
-            if (!HttpContext.Request.Cookies.ContainsKey("RendelesCookie") || HttpContext.Request.Cookies["RendelesCookie"] == null)
-            {
-                HttpContext.Response.Cookies.Append("RendelesCookie", Guid.NewGuid().ToString());
-            }
-            rendeles.UserCookie = HttpContext.Request.Cookies["RendelesCookie"];
+            var cookie =HttpContext.Request.Cookies["RendelesCookie"];
+            rendeles.UserCookie = cookie;
            
             _context.Rendeles.Add(rendeles);
             _context.SaveChanges();
