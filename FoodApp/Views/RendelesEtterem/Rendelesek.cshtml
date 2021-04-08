@@ -3,16 +3,21 @@
 @{
     ViewData["Title"] = "Rendelések";
 }
+@{
+    FoodApp.ViewModels.RendelesEtteremViewModel model1 = new FoodApp.ViewModels.RendelesEtteremViewModel();
+}
 
-@foreach (var rendeles in Model) 
-{ 
-<div class="card">
-    <div class="card-header">
-        <h5>@rendeles.RendelesAdatok.VezetekNev @rendeles.RendelesAdatok.KeresztNev</h5>
-    </div>
-    <div class="card-body">
-        <h6 class="card-title">@rendeles.RendelesAdatok.Iranyitoszam @rendeles.RendelesAdatok.Varos @rendeles.RendelesAdatok.Cim</h6>
-    </div>
+@{model1.SegedValtozo = 0; }
+@foreach (var rendeles in Model)
+{
+    model1.SegedValtozo++;
+    <div class="card">
+        <div class="card-header">
+            <h5>@rendeles.RendelesAdatok.VezetekNev @rendeles.RendelesAdatok.KeresztNev</h5>
+        </div>
+        <div class="card-body">
+            <h6 class="card-title">@rendeles.RendelesAdatok.Iranyitoszam @rendeles.RendelesAdatok.Varos @rendeles.RendelesAdatok.Cim</h6>
+        </div>
         <ul class="list-group list-group-flush">
             @foreach (var etel in rendeles.RendelesEtelek)
             {
@@ -23,6 +28,17 @@
         <div class="card-body">
             <p class="card-text">Összesen: @rendeles.RendelesTotal Ft</p>
         </div>
-</div>
-<br>
+    </div>
+    <br>
+}
+@{
+    if (model1.SegedValtozo == 0)
+    {
+        <div class="card">
+            <div class="card-header">
+                <h5>Jelenleg nincs egy rendelésünk sem.</h5>
+            </div>
+        </div>
+        <br>
+    }
 }
