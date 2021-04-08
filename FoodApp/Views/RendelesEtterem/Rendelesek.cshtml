@@ -3,8 +3,14 @@
 @{
     ViewData["Title"] = "Rendelések";
 }
+@{
+    FoodApp.ViewModels.RendelesEtteremViewModel model1 = new FoodApp.ViewModels.RendelesEtteremViewModel();
+}
+
+@{model1.SegedValtozo = 0; }
 @foreach (var rendeles in Model)
 {
+    model1.SegedValtozo++;
     <div class="card">
         <div class="card-header">
             <h5>@rendeles.RendelesAdatok.VezetekNev @rendeles.RendelesAdatok.KeresztNev</h5>
@@ -25,9 +31,14 @@
     </div>
     <br>
 }
-<div class="card">
-    <div class="card-header">
-        <h5>Jelenleg nincs egy rendelésünk sem.</h5>
-    </div>
-</div>
-<br>
+@{
+    if (model1.SegedValtozo == 0)
+    {
+        <div class="card">
+            <div class="card-header">
+                <h5>Jelenleg nincs egy rendelésünk sem.</h5>
+            </div>
+        </div>
+        <br>
+    }
+}
