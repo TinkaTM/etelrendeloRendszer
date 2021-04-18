@@ -4,14 +4,16 @@ using FoodApp.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace FoodApp.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210418210537_futar3")]
+    partial class futar3
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -102,44 +104,6 @@ namespace FoodApp.Data.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Food");
-                });
-
-            modelBuilder.Entity("FoodApp.Models.FutarAdat", b =>
-                {
-                    b.Property<int>("FutarId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("Jarmu")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Keresztnev")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("Kezdes")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Telefonszam")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("UserId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("Varos")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("Vegzes")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Vezeteknev")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("FutarId");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("FutarAdat");
                 });
 
             modelBuilder.Entity("FoodApp.Models.KocsiItem", b =>
@@ -497,13 +461,6 @@ namespace FoodApp.Data.Migrations
                 });
 
             modelBuilder.Entity("FoodApp.Models.EtteremCim", b =>
-                {
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", "IdentityUser")
-                        .WithMany()
-                        .HasForeignKey("UserId");
-                });
-
-            modelBuilder.Entity("FoodApp.Models.FutarAdat", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", "IdentityUser")
                         .WithMany()
