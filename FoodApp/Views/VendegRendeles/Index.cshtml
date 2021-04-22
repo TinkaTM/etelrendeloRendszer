@@ -20,20 +20,41 @@
                 @foreach (var allapot in rendeles.RendelesEtelek)
                 {
                 <div class="d-flex justify-content-between">
-                    <h5>@allapot.Key.Etterem.EtteremNev</h5> <small> @allapot.Key.RenStatus</small>
+                    <h5>@allapot.Key.Etterem.EtteremNev</h5>
+                    @{
+                        switch ((int)allapot.Key.RenStatus)
+                        {
+                            case 0:
+                                <text>
+                                    <small>A Rendelésed feldolgozás alatt.</small>
+                                </text>
+                                break;
+                            case 1:
+                                <text>
+                                    <small>A Rendelésed feldolgoztuk. várható elkészülési idő: @allapot.Key.CompletionTime</small>
+                                </text>
+                                break;
+                            case 2:
+                                <text>
+                                    <small>A Rendelésed elutasításra került.</small>
+                                </text>
+                                break;
+
+                        }
+                    }
                 </div>
-                @foreach (var etel in allapot.Value)
-                {
-                    <div class="d-flex justify-content-between">
-                    <p>@etel.Etlap.Nev x @etel.Darab</p> <small>@{int total = etel.Darab * etel.Etlap.Ar;} @total Ft </small>
-                    </div>
-                }
+                    @foreach (var etel in allapot.Value)
+                    {
+                        <div class="d-flex justify-content-between">
+                            <p>@etel.Etlap.Nev x @etel.Darab</p> <small>@{int total = etel.Darab * etel.Etlap.Ar;} @total Ft </small>
+                        </div>
+                    }
                 }
             </div>
         </div>
-    <div class="card-footer">
-        <p class="card-text">Összesen: @rendeles.RendelesTotal Ft</p>
-    </div>
+        <div class="card-footer">
+            <p class="card-text">Összesen: @rendeles.RendelesTotal Ft</p>
+        </div>
     </div>
     <br>
 }

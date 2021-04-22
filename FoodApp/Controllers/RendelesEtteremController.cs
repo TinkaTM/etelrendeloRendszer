@@ -61,6 +61,7 @@ namespace FoodApp.Controllers
             
             return View(vms);
         }
+        [HttpPost]
         public async Task<IActionResult> RendelesElfogad(int statId, DateTime Compdate) 
         {
             var stat = await _context.rendelesStatuse.FindAsync(statId);

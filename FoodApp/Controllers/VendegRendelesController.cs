@@ -40,7 +40,7 @@ namespace FoodApp.Controllers
                         int total = 0;
                         foreach (var stat in Stats) 
                         {
-                            rd = _context.RendelesDetail.Where(r => r.RendelesId == rendeles.RendelesId).ToList();
+                            rd = _context.RendelesDetail.Where(r => r.RendelesId == rendeles.RendelesId && r.EtteremCimId == stat.EtteremId).ToList();
                             stat.Etterem = _context.EtteremCim.Find(stat.EtteremId);
                             foreach (var re in rd)
                             {
