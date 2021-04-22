@@ -8,6 +8,8 @@
   <ItemGroup>
     <Compile Remove="Data\Migrations\20210418210806_futaradat.cs" />
     <Compile Remove="Data\Migrations\20210418210806_futaradat.Designer.cs" />
+    <Compile Remove="Data\Migrations\20210422132652_rendeles2.cs" />
+    <Compile Remove="Data\Migrations\20210422132652_rendeles2.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>

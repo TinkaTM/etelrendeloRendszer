@@ -4,14 +4,16 @@ using FoodApp.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace FoodApp.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210422100848_rendelesallapot4")]
+    partial class rendelesallapot4
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -207,9 +209,6 @@ namespace FoodApp.Data.Migrations
                     b.Property<string>("UserCookie")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("UserId")
-                        .HasColumnType("nvarchar(450)");
-
                     b.Property<string>("Varos")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -219,8 +218,6 @@ namespace FoodApp.Data.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("RendelesId");
-
-                    b.HasIndex("UserId");
 
                     b.ToTable("Rendeles");
                 });
@@ -559,13 +556,6 @@ namespace FoodApp.Data.Migrations
                         .HasForeignKey("EtteremCimId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-                });
-
-            modelBuilder.Entity("FoodApp.Models.Rendeles", b =>
-                {
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", "IdentityUser")
-                        .WithMany()
-                        .HasForeignKey("UserId");
                 });
 
             modelBuilder.Entity("FoodApp.Models.RendelesDetail", b =>

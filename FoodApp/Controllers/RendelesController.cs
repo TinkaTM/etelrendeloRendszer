@@ -60,6 +60,7 @@ namespace FoodApp.Controllers
                 rendeles.UserCookie = cookie;
                 _context.Rendeles.Add(rendeles);
                 _context.SaveChanges();
+                HashSet<int> Etterems = new HashSet<int>();
                 foreach (var item in items)
                 {
                     RendelesDetail rendelesDetail = new RendelesDetail
@@ -69,9 +70,22 @@ namespace FoodApp.Controllers
                         Etlap = item.Etel,
                         EtteremCimId = item.EtteremCimId
                     };
+                    Etterems.Add(item.EtteremCimId);
                     _context.RendelesDetail.Add(rendelesDetail);
                     _context.SaveChanges();
                 }
+                foreach(var etterem in Etterems) 
+                {
+                    RendelesStatus stat = new RendelesStatus
+                    {
+                        Rendeles = rendeles,
+                        RenStatus = Status.Pending,
+                        EtteremId = etterem
+                    };
+                    _context.rendelesStatuse.Add(stat);
+                    _context.SaveChanges();
+                }
+                
                 _kocsi.ClearKocsi();  
             }
                 return RedirectToAction("Index", "Home");
@@ -84,6 +98,7 @@ namespace FoodApp.Controllers
             var items = _kocsi.GetKocsiItems();
             _kocsi.KocsiItems = items;
             var cim = _context.VendegCim.Where(c => c.VendegCimId == Int32.Parse(Cimid)).FirstOrDefault();
+            HashSet<int> Etterems = new HashSet<int>();
             Rendeles rendeles = new Rendeles
             {
                 VezetekNev = cim.VezetekNev,
@@ -92,8 +107,10 @@ namespace FoodApp.Controllers
                 Iranyitoszam = cim.Iranyitoszam,
                 Cim = cim.Cim,
                 Email = cim.Email,
-                Telefonszam = cim.Telefonszam
-            };
+                Telefonszam = cim.Telefonszam,
+                UserId = _userManager.GetUserId(HttpContext.User)
+
+        };
             rendeles.RendelesIdo = DateTime.Now;
             var cookie =HttpContext.Request.Cookies["RendelesCookie"];
             rendeles.UserCookie = cookie;
@@ -109,7 +126,19 @@ namespace FoodApp.Controllers
                     Etlap = item.Etel,
                     EtteremCimId = item.EtteremCimId
                 };
+                Etterems.Add(item.EtteremCimId);
                 _context.RendelesDetail.Add(rendelesDetail);
+                _context.SaveChanges();
+            }
+            foreach (var etterem in Etterems)
+            {
+                RendelesStatus stat = new RendelesStatus
+                {
+                    Rendeles = rendeles,
+                    RenStatus = Status.Pending,
+                    EtteremId = etterem
+                };
+                _context.rendelesStatuse.Add(stat);
                 _context.SaveChanges();
             }
             _kocsi.ClearKocsi();

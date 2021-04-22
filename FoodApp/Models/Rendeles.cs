@@ -1,7 +1,9 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Identity;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace FoodApp.Models
 {
@@ -36,5 +38,8 @@ namespace FoodApp.Models
         [DisplayName("Rendelés idő:")]
         public DateTime RendelesIdo { get; set; }
         public string UserCookie { get; set; }
+        public string? UserId { get; set; }
+        [ForeignKey("UserId")]
+        public virtual IdentityUser? IdentityUser { get; set; }
     }
 }

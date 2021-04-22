@@ -6,11 +6,10 @@ using System.Threading.Tasks;
 
 namespace FoodApp.ViewModels
 {
-    public class RendelesEtteremViewModel
+    public class VendegRendelesViewModel
     {
         public Rendeles RendelesAdatok { get; set; }
-        public List<RendelesDetail> RendelesEtelek { get; set; }
-        public RendelesStatus Stat { get; set; }
+        public Dictionary<RendelesStatus,List<RendelesDetail>> RendelesEtelek { get; set; }
         public int RendelesTotal { get; set; }
         public int SegedValtozo { get; set; }
     }

@@ -1,0 +1,50 @@
+﻿@model IEnumerable<FoodApp.ViewModels.VendegRendelesViewModel>
+
+@{
+    ViewData["Title"] = "Rendelések";
+}
+@{
+    FoodApp.ViewModels.VendegRendelesViewModel model1 = new FoodApp.ViewModels.VendegRendelesViewModel();
+}
+
+@{model1.SegedValtozo = 0; }
+@foreach (var rendeles in Model)
+{
+    model1.SegedValtozo++;
+    <div class="card">
+        <div class="card-header">
+            <h5>@rendeles.RendelesAdatok.VezetekNev @rendeles.RendelesAdatok.KeresztNev</h5> <small>@rendeles.RendelesAdatok.RendelesIdo</small>
+        </div>
+        <div class="card-body">
+            <div class="list-group">
+                @foreach (var allapot in rendeles.RendelesEtelek)
+                {
+                <div class="d-flex justify-content-between">
+                    <h5>@allapot.Key.Etterem.EtteremNev</h5> <small> @allapot.Key.RenStatus</small>
+                </div>
+                @foreach (var etel in allapot.Value)
+                {
+                    <div class="d-flex justify-content-between">
+                    <p>@etel.Etlap.Nev x @etel.Darab</p> <small>@{int total = etel.Darab * etel.Etlap.Ar;} @total Ft </small>
+                    </div>
+                }
+                }
+            </div>
+        </div>
+    <div class="card-footer">
+        <p class="card-text">Összesen: @rendeles.RendelesTotal Ft</p>
+    </div>
+    </div>
+    <br>
+}
+@{
+    if (model1.SegedValtozo == 0)
+    {
+        <div class="card">
+            <div class="card-header">
+                <h5>Jelenleg nincs egy rendelésünk sem.</h5>
+            </div>
+        </div>
+        <br>
+    }
+}

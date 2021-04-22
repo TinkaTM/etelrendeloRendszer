@@ -45,6 +45,7 @@ namespace FoodApp.Controllers
                     {
                         RendelesAdatok = _context.Rendeles.Find(rendeles.Key),
                         RendelesEtelek = rendeles.Value,
+                        Stat = _context.rendelesStatuse.Where(s => s.RendelesId == rendeles.Key && s.EtteremId == Etteremid ).FirstOrDefault()
                     };
                     int total = 0;
                     foreach(var etel in rendeles.Value)
@@ -59,6 +60,18 @@ namespace FoodApp.Controllers
            
             
             return View(vms);
+        }
+        public async Task<IActionResult> RendelesElfogad(int statId, DateTime Compdate) 
+        {
+            var stat = await _context.rendelesStatuse.FindAsync(statId);
+            DateTime curr = DateTime.Now;
+            curr = curr.AddHours(Compdate.Hour);
+            curr = curr.AddMinutes(Compdate.Minute);
+            stat.CompletionTime = curr;
+            stat.RenStatus = Status.Accepted;
+            _context.Update(stat);
+            _context.SaveChanges();
+            return RedirectToAction("Rendelesek");
         }
     }
 }

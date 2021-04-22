@@ -4,14 +4,16 @@ using FoodApp.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace FoodApp.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210422085139_rendelesallapot1")]
+    partial class rendelesallapot1
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -207,9 +209,6 @@ namespace FoodApp.Data.Migrations
                     b.Property<string>("UserCookie")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("UserId")
-                        .HasColumnType("nvarchar(450)");
-
                     b.Property<string>("Varos")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -219,8 +218,6 @@ namespace FoodApp.Data.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("RendelesId");
-
-                    b.HasIndex("UserId");
 
                     b.ToTable("Rendeles");
                 });
@@ -265,18 +262,13 @@ namespace FoodApp.Data.Migrations
                     b.Property<DateTime>("CompletionTime")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("EtteremId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("RenStatus")
-                        .HasColumnType("int");
-
                     b.Property<int>("RendelesId")
                         .HasColumnType("int");
 
-                    b.HasKey("RendelesStatusId");
+                    b.Property<int>("Status")
+                        .HasColumnType("int");
 
-                    b.HasIndex("EtteremId");
+                    b.HasKey("RendelesStatusId");
 
                     b.HasIndex("RendelesId");
 
@@ -561,13 +553,6 @@ namespace FoodApp.Data.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("FoodApp.Models.Rendeles", b =>
-                {
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", "IdentityUser")
-                        .WithMany()
-                        .HasForeignKey("UserId");
-                });
-
             modelBuilder.Entity("FoodApp.Models.RendelesDetail", b =>
                 {
                     b.HasOne("FoodApp.Models.Etlap", "Etlap")
@@ -591,12 +576,6 @@ namespace FoodApp.Data.Migrations
 
             modelBuilder.Entity("FoodApp.Models.RendelesStatus", b =>
                 {
-                    b.HasOne("FoodApp.Models.EtteremCim", "Etterem")
-                        .WithMany()
-                        .HasForeignKey("EtteremId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("FoodApp.Models.Rendeles", "Rendeles")
                         .WithMany()
                         .HasForeignKey("RendelesId")
