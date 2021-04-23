@@ -6,6 +6,35 @@
 @{
     FoodApp.ViewModels.VendegRendelesViewModel model1 = new FoodApp.ViewModels.VendegRendelesViewModel();
 }
+<script>
+    function timer(dat, id) {
+
+
+        var x = setInterval(function () {
+            var countDownDate = dat;
+            var now = new Date().getTime();
+
+
+            var distance = countDownDate - now;
+
+
+
+            var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+
+            document.getElementById(id).innerHTML = days + "d " + hours + "h "
+                + minutes + "m " + seconds + "s ";
+
+            if (distance <= 0) {
+                clearInterval(x);
+                document.getElementById(id).innerHTML = "EXPIRED";
+            }
+        }, 1000);
+    }
+</script>
 
 @{model1.SegedValtozo = 0; }
 @foreach (var rendeles in Model)
@@ -17,32 +46,42 @@
         </div>
         <div class="card-body">
             <div class="list-group">
+                @{int v = 0; }
                 @foreach (var allapot in rendeles.RendelesEtelek)
                 {
-                <div class="d-flex justify-content-between">
-                    <h5>@allapot.Key.Etterem.EtteremNev</h5>
-                    @{
-                        switch ((int)allapot.Key.RenStatus)
-                        {
-                            case 0:
-                                <text>
-                                    <small>A Rendelésed feldolgozás alatt.</small>
-                                </text>
-                                break;
-                            case 1:
-                                <text>
-                                    <small>A Rendelésed feldolgoztuk. várható elkészülési idő: @allapot.Key.CompletionTime</small>
-                                </text>
-                                break;
-                            case 2:
-                                <text>
-                                    <small>A Rendelésed elutasításra került.</small>
-                                </text>
-                                break;
+                    { v++; }
+                    <div class="d-flex justify-content-between">
+                        <h5>@allapot.Key.Etterem.EtteremNev</h5>
+                        @{
+                            switch ((int)allapot.Key.RenStatus)
+                            {
+                                case 0:
+                                    <text>
+                                        <small>A Rendelésed feldolgozás alatt.</small>
+                                    </text>
+                                    break;
+                                case 1:
+                                    <text>
+                                        <small>A Rendelésed feldolgoztuk. várható elkészülési idő: @allapot.Key.CompletionTime.ToString("dd/MM/yyyy HH:mm:ss")</small>
+                                        <small id=@v></small>
+                                        <script type="text/javascript">
+                                            var date = "@allapot.Key.CompletionTime.ToString("yyyy-MM-ddTHH:mm:ssZ")";
+                                            var id = @v;
+                                            var a = new Date(date);
+                                            var countDownDate = a.getTime();
+                                            timer(countDownDate, id);
+                                        </script>
+                                    </text>
+                                    break;
+                                case 2:
+                                    <text>
+                                        <small>A Rendelésed elutasításra került.</small>
+                                    </text>
+                                    break;
 
+                            }
                         }
-                    }
-                </div>
+                    </div>
                     @foreach (var etel in allapot.Value)
                     {
                         <div class="d-flex justify-content-between">
@@ -69,3 +108,4 @@
         <br>
     }
 }
+

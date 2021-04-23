@@ -28,7 +28,7 @@
     <div class="card-body">
         <p class="card-text">Összesen: @rendeles.RendelesTotal Ft</p>
     </div>
-    <div class="card-body">
+    <div class="card-footer">
         @if (rendeles.Stat.RenStatus == Status.Pending)
         {
             <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">Megrendelem!</button>
