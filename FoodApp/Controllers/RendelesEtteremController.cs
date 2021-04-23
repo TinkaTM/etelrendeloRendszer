@@ -74,5 +74,12 @@ namespace FoodApp.Controllers
             _context.SaveChanges();
             return RedirectToAction("Rendelesek");
         }
+        public async Task<IActionResult> RendelesElutasit(int statId) {
+            var stat = await _context.rendelesStatuse.FindAsync(statId);
+            stat.RenStatus = Status.Declined;
+            _context.Update(stat);
+            _context.SaveChanges();
+            return RedirectToAction("Rendelesek");
+        }
     }
 }

@@ -32,7 +32,7 @@
         @if (rendeles.Stat.RenStatus == Status.Pending)
         {
             <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">Megrendelem!</button>
-            <button class="btn btn-danger">Elutasít</button>
+            <a class="btn btn-danger" asp-action="RendelesElutasit" asp-route-statId="@rendeles.Stat.RendelesStatusId">Elutasít</a>
         }
         @if (rendeles.Stat.RenStatus == Status.Accepted)
         {

@@ -63,8 +63,37 @@ namespace FoodApp.Controllers
             }
             else
             {
-                return View();
+                var cookie = HttpContext.Request.Cookies["RendelesCookie"];
+                var Rendelesek = _context.Rendeles.Where(s => s.UserCookie == cookie).ToList();
+                foreach (var rendeles in Rendelesek)
+                {
+                    List<RendelesStatus> Stats = new List<RendelesStatus>();
+                    List<RendelesDetail> rd = new List<RendelesDetail>();
+                    Dictionary<RendelesStatus, List<RendelesDetail>> rendelesadatok = new Dictionary<RendelesStatus, List<RendelesDetail>>();
+                    Stats = _context.rendelesStatuse.Where(r => r.RendelesId == rendeles.RendelesId).ToList();
+                    int total = 0;
+                    foreach (var stat in Stats)
+                    {
+                        rd = _context.RendelesDetail.Where(r => r.RendelesId == rendeles.RendelesId && r.EtteremCimId == stat.EtteremId).ToList();
+                        stat.Etterem = _context.EtteremCim.Find(stat.EtteremId);
+                        foreach (var re in rd)
+                        {
+                            re.Etlap = _context.Etlap.Find(re.EtlapId);
+                            total = total + re.Etlap.Ar * re.Darab;
+                        }
+                        rendelesadatok.Add(stat, rd);
+                    }
+                    VendegRendelesViewModel vm = new VendegRendelesViewModel
+                    {
+                        RendelesAdatok = rendeles,
+                        RendelesEtelek = rendelesadatok,
+                        RendelesTotal = total
+                    };
+
+                    vms.Add(vm);
+                }
             }
+            return View(vms);
         }
     }
 }

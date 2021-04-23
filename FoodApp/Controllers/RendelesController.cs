@@ -1,5 +1,6 @@
 ﻿using FoodApp.Data;
 using FoodApp.Models;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -26,7 +27,9 @@ namespace FoodApp.Controllers
             if (!HttpContext.Request.Cookies.ContainsKey("RendelesCookie") || HttpContext.Request.Cookies["RendelesCookie"] == null || HttpContext.Request.Cookies["RendelesCookie"] == "")
             {
                 string cookieid = Guid.NewGuid().ToString();
-                HttpContext.Response.Cookies.Append("RendelesCookie", cookieid);
+                CookieOptions cookieOptions = new CookieOptions();
+                cookieOptions.Expires = new DateTimeOffset(DateTime.Now.AddDays(3));
+                HttpContext.Response.Cookies.Append("RendelesCookie", cookieid,cookieOptions);
             }
             var items = _kocsi.GetKocsiItems();
             _kocsi.KocsiItems = items;
@@ -38,7 +41,9 @@ namespace FoodApp.Controllers
             if (!HttpContext.Request.Cookies.ContainsKey("RendelesCookie") || HttpContext.Request.Cookies["RendelesCookie"] == null || HttpContext.Request.Cookies["RendelesCookie"] == "")
             {
                 string cookieid = Guid.NewGuid().ToString();
-                HttpContext.Response.Cookies.Append("RendelesCookie", cookieid);
+                CookieOptions cookieOptions = new CookieOptions();
+                cookieOptions.Expires = new DateTimeOffset(DateTime.Now.AddDays(3));
+                HttpContext.Response.Cookies.Append("RendelesCookie", cookieid, cookieOptions);
             }
             var items = _kocsi.GetKocsiItems();
             _kocsi.KocsiItems = items;
