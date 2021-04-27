@@ -64,7 +64,7 @@ namespace FoodApp.Controllers
             else
             {
                 var cookie = HttpContext.Request.Cookies["RendelesCookie"];
-                var Rendelesek = _context.Rendeles.Where(s => s.UserCookie == cookie).ToList();
+                var Rendelesek = _context.Rendeles.Where(s => s.UserCookie == cookie && s.UserId == null).ToList();
                 foreach (var rendeles in Rendelesek)
                 {
                     List<RendelesStatus> Stats = new List<RendelesStatus>();
