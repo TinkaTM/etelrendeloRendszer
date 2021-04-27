@@ -28,17 +28,26 @@
                             {
                                 case 0:
                                     <text>
-                                        <small>A Rendelésed feldolgozás alatt.</small>
+                                        <small>A rendelése feldolgozás alatt áll. Kérjük, várjon.</small>
                                     </text>
                                     break;
                                 case 1:
                                     <text>
-                                        <small>A Rendelésed feldolgoztuk. várható elkészülési idő: @allapot.Key.CompletionTime.ToString("dd/MM/yyyy HH:mm:ss")</small>
+
+                                        <small>Rendelését sikeresen feldolgoztuk. Várható elkészülési idő: @allapot.Key.CompletionTime.ToString("dd/MM/yyyy HH:mm:ss")</small>
+                                        <small id=@v></small>
+                                        <script type="text/javascript">
+                                            var date = "@allapot.Key.CompletionTime.ToString("yyyy-MM-ddTHH:mm:ssZ")";
+                                            var id = @v;
+                                            var a = new Date(date);
+                                            var countDownDate = a.getTime();
+                                            timer(countDownDate, id);
+                                        </script>
                                     </text>
                                     break;
                                 case 2:
                                     <text>
-                                        <small>A Rendelésed elutasításra került.</small>
+                                        <small>Rendelése sajnos elutasításra került. Elnézést kérünk a kellemetlenségért.</small>
                                     </text>
                                     break;
 
@@ -65,7 +74,7 @@
     {
         <div class="card">
             <div class="card-header">
-                <h5>Jelenleg nincs egy rendelésünk sem.</h5>
+                <h5>Jelenleg nincs egy rendelése sem.</h5>
             </div>
         </div>
         <br>

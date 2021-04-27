@@ -64,6 +64,8 @@ namespace FoodApp.Areas.Identity.Pages.Account
             [Display(Name = "Erősítse meg a jelszavát!")]
             [Compare("Password", ErrorMessage = "A kettő jelszó nem egyezik!")]
             public string ConfirmPassword { get; set; }
+            [Required]
+            [Display(Name = "Pozíció:")]
             public string Name { get; set; }
 
         }

@@ -32,9 +32,10 @@
     <div class="card-footer">
         @if (rendeles.Stat.RenStatus == Status.Pending)
         {
-            
-            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#@seged">Megrendelem!</button>
-            <a class="btn btn-danger" asp-action="RendelesElutasit" asp-route-statId="@rendeles.Stat.RendelesStatusId">Elutasít</a>
+
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">Elfogadás</button>
+            <a class="btn btn-danger" asp-action="RendelesElutasit" asp-route-statId="@rendeles.Stat.RendelesStatusId">Elutasítás</a>
+
         }
         @if (rendeles.Stat.RenStatus == Status.Accepted)
         {
@@ -42,7 +43,7 @@
         }
         @if (rendeles.Stat.RenStatus == Status.Declined)
         {
-            <h5>Elutasitva</h5>
+            <h5>Elutasítva</h5>
         }
         </div>
     
@@ -53,7 +54,7 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Rendelés megerősítése</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">Rendelés elkészülési ideje: </h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Mégsem">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -61,9 +62,9 @@
                 <div class="modal-footer">
                     <form method="post" asp-action="RendelesElfogad" asp-route-statId="@rendeles.Stat.RendelesStatusId" asp-route-Compdate="compdate">
                         <input class="form-control" type="time" name="compdate" />
-                        <button class="btn btn-success" type="submit">Elfogad</button>
+                        <button class="btn btn-success" type="submit">Megerősítés</button>
                     </form>
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Vissza</button>
                 </div>
             </div>
         </div>
