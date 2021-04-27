@@ -10,7 +10,13 @@ namespace FoodApp.Models
     { 
         Pending,
         Accepted,
-        Declined
+        Declined,
+        EWaiting,
+        FWaiting,
+        FOntheway,
+        FRetry,
+        Completed,
+        Pickup
     }
     public class RendelesStatus
     {
@@ -19,6 +25,8 @@ namespace FoodApp.Models
         public int EtteremId { get; set; }
         public virtual Rendeles Rendeles { get; set; }
         public virtual EtteremCim Etterem { get; set; }
+        public int? FutarId { get; set; }
+        public FutarAdat? Futar { get; set; }
         public Status RenStatus { get; set; }
         [DataType(DataType.Time)]
         public DateTime CompletionTime { get; set; }

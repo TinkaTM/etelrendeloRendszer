@@ -1,0 +1,32 @@
+﻿@model IEnumerable<FoodApp.ViewModels.FutarViewModel>
+
+@{
+    ViewData["Title"] = "Futárok";
+}
+
+@foreach (var item in Model) 
+{
+    <div class="card">
+        <div class="card-header">
+            <div class="d-flex justify-content-between">
+                <h5>@item.Futar.Vezeteknev @item.Futar.Keresztnev</h5>
+                <small>@item.Futar.Jarmu</small>
+            </div>
+            </div>
+        <div class="card-body">
+            <p>Város: @item.Futar.Varos</p>
+            <p>Telefonszám: @item.Futar.Telefonszam</p>
+            <p>Munkaidő: @item.Futar.Kezdes.ToString("HH:mm") - @item.Futar.Vegzes.ToString("HH:mm")</p>
+        </div>
+        <div class="card-footer">
+            @if(item.Elerheto == true)
+                {
+                    <button class="btn-primary">Rendekelések kezelése</button>
+                }
+            else 
+                {
+                <p>A Futár épp nem Dolgozik</p>
+                }
+        </div>
+        </div>
+}
