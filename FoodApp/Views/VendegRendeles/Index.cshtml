@@ -57,12 +57,12 @@
                             {
                                 case 0:
                                     <text>
-                                        <small>A rendelésed feldolgozás alatt áll. Kérjük, várjon.</small>
+                                        <small>A rendelése feldolgozás alatt áll. Kérjük, várjon.</small>
                                     </text>
                                     break;
                                 case 1:
                                     <text>
-                                        <small>A rendelésed sikeresen feldolgoztuk. Várható elkészülési idő: @allapot.Key.CompletionTime.ToString("dd/MM/yyyy HH:mm:ss")</small>
+                                        <small>Rendelését sikeresen feldolgoztuk. Várható elkészülési idő: @allapot.Key.CompletionTime.ToString("dd/MM/yyyy HH:mm:ss")</small>
                                         <small id=@v></small>
                                         <script type="text/javascript">
                                             var date = "@allapot.Key.CompletionTime.ToString("yyyy-MM-ddTHH:mm:ssZ")";
@@ -75,7 +75,7 @@
                                     break;
                                 case 2:
                                     <text>
-                                        <small>A rendelésed sajnos elutasításra került. Elnézést kérünk a kellemetlenségért.</small>
+                                        <small>Rendelése sajnos elutasításra került. Elnézést kérünk a kellemetlenségért.</small>
                                     </text>
                                     break;
 
