@@ -6,35 +6,6 @@
 @{
     FoodApp.ViewModels.VendegRendelesViewModel model1 = new FoodApp.ViewModels.VendegRendelesViewModel();
 }
-<script>
-    function timer(dat, id) {
-
-
-        var x = setInterval(function () {
-            var countDownDate = dat;
-            var now = new Date().getTime();
-
-
-            var distance = countDownDate - now;
-
-
-
-            var days = Math.floor(distance / (1000 * 60 * 60 * 24));
-            var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-            var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-            var seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
-
-            document.getElementById(id).innerHTML = days + "d " + hours + "h "
-                + minutes + "m " + seconds + "s ";
-
-            if (distance <= 0) {
-                clearInterval(x);
-                document.getElementById(id).innerHTML = "EXPIRED";
-            }
-        }, 1000);
-    }
-</script>
 
 @{model1.SegedValtozo = 0; }
 @foreach (var rendeles in Model)
@@ -62,6 +33,7 @@
                                     break;
                                 case 1:
                                     <text>
+
                                         <small>Rendelését sikeresen feldolgoztuk. Várható elkészülési idő: @allapot.Key.CompletionTime.ToString("dd/MM/yyyy HH:mm:ss")</small>
                                         <small id=@v></small>
                                         <script type="text/javascript">

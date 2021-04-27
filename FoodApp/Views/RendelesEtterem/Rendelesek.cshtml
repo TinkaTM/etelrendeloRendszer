@@ -11,6 +11,7 @@
 @foreach (var rendeles in Model)
 {
     model1.SegedValtozo++;
+    string seged = "modal"+ Convert.ToString(model1.SegedValtozo);
 <div class="card">
     <div class="card-header">
         <h5>@rendeles.RendelesAdatok.VezetekNev @rendeles.RendelesAdatok.KeresztNev</h5>
@@ -31,8 +32,10 @@
     <div class="card-footer">
         @if (rendeles.Stat.RenStatus == Status.Pending)
         {
+
             <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">Elfogadás</button>
             <a class="btn btn-danger" asp-action="RendelesElutasit" asp-route-statId="@rendeles.Stat.RendelesStatusId">Elutasítás</a>
+
         }
         @if (rendeles.Stat.RenStatus == Status.Accepted)
         {
@@ -47,7 +50,7 @@
     
 
     <!-- Modal -->
-    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade" id="@seged" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
