@@ -66,8 +66,15 @@ namespace FoodApp.Controllers
         {
             var stat = await _context.rendelesStatuse.FindAsync(statId);
             DateTime curr = DateTime.Now;
-            curr = curr.AddHours(Compdate.Hour);
-            curr = curr.AddMinutes(Compdate.Minute);
+            if (Compdate == DateTime.MinValue)
+            {
+                curr = curr.AddHours(1);
+            }
+            else
+            {
+                curr = curr.AddHours(Compdate.Hour);
+                curr = curr.AddMinutes(Compdate.Minute);
+            }
             stat.CompletionTime = curr;
             stat.RenStatus = Status.Accepted;
             _context.Update(stat);
