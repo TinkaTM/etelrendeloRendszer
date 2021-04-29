@@ -1,0 +1,43 @@
+﻿@model FoodApp.ViewModels.FutarRendelesKezelViewModel
+
+@{
+    ViewData["Title"] = "Futár Kezelése";
+}
+@{
+    var slidenumber = Convert.ToDouble(Model.Rendelesek.Count) / 4;
+    slidenumber = Convert.ToInt32(Math.Ceiling(slidenumber));
+    string active = "<div class=\"carousel-item active\">";
+    string deactive = "<div class=\"carousel-item \">";
+    string end = "</div>";
+}
+<div id="multi-item-example" class="carousel slide" data-interval="false">
+
+    <div class="controls-top">
+        <a class="btn-floating" href="#multi-item-example" data-slide="prev"><i class="btn btn-primary btn-sm"><</i></a>
+        <a class="btn-floating" href="#multi-item-example" data-slide="next">
+            <i class="btn btn-primary btn-sm">></i>
+        </a>
+    </div>
+
+
+    <div class="carousel-inner" role="listbox">
+
+        @for (int i = 0; i < Model.Rendelesek.Count; i++)
+        {
+            var ac = i == 1 ? "active" : "";
+            <div class="carousel-item @ac">
+                <div class="col-md-3" style="float:left">
+                    <div class="card">
+                        <div class="card-header">
+
+                        </div>
+                        <div class="card-body">
+                            <p>Valami</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+
+    </div>
+</div>

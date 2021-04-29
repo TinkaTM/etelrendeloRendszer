@@ -21,7 +21,7 @@
         <div class="card-footer">
             @if(item.Elerheto == true)
                 {
-                    <button class="btn-primary">Rendekelések kezelése</button>
+                    <a class="btn-primary" asp-action="FutarRendelesKezel" asp-route-Futarid="@item.Futar.FutarId">Rendekelések kezelése</a>
                 }
             else 
                 {
