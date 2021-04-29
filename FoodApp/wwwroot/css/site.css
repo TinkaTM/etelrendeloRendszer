@@ -70,3 +70,14 @@ body {
   white-space: nowrap;
   line-height: 60px; /* Vertically center the text there */
 }
+
+.testimonial-group > .row {
+    display: block;
+    overflow-x: auto;
+    white-space: nowrap;
+}
+
+    .testimonial-group > .row > .col-md-3 {
+    display: inline-block;
+    }
+

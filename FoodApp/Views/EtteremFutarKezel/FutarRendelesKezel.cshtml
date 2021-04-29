@@ -3,41 +3,51 @@
 @{
     ViewData["Title"] = "Futár Kezelése";
 }
-@{
-    var slidenumber = Convert.ToDouble(Model.Rendelesek.Count) / 4;
-    slidenumber = Convert.ToInt32(Math.Ceiling(slidenumber));
-    string active = "<div class=\"carousel-item active\">";
-    string deactive = "<div class=\"carousel-item \">";
-    string end = "</div>";
-}
-<div id="multi-item-example" class="carousel slide" data-interval="false">
 
-    <div class="controls-top">
-        <a class="btn-floating" href="#multi-item-example" data-slide="prev"><i class="btn btn-primary btn-sm"><</i></a>
-        <a class="btn-floating" href="#multi-item-example" data-slide="next">
-            <i class="btn btn-primary btn-sm">></i>
-        </a>
-    </div>
-
-
-    <div class="carousel-inner" role="listbox">
-
-        @for (int i = 0; i < Model.Rendelesek.Count; i++)
+<div class="container testimonial-group">
+    <div id="sourcee" class="row text-center">
+        @for (int i = 0; i < 15; i++)
         {
-            var ac = i == 1 ? "active" : "";
-            <div class="carousel-item @ac">
-                <div class="col-md-3" style="float:left">
-                    <div class="card">
-                        <div class="card-header">
-
-                        </div>
-                        <div class="card-body">
-                            <p>Valami</p>
-                        </div>
+            <div class="col-md-3 source">
+                <div class="card">
+                    <div class="card-body">
+                        <p>valami</p>
                     </div>
                 </div>
-            </div>
-        }
-
+            </div>  
+         }
     </div>
 </div>
+<br>
+<br>
+<div class="container testimonial-group">
+    <div id="targete" class="row text-center">
+        <div class="col-md-3">
+            <div class="card">
+                <div class="card-body">
+                    <p>valami</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card">
+                <div class="card-body">
+                    <p>valami</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(document).on('click', '.col-md-3.source', function () {
+        $("#targete").append(this);
+        $(this).removeClass("source").addClass("target");
+        return false;
+    });
+    $(document).on('click', '.col-md-3.target', function () {
+        $("#sourcee").append(this);
+        $(this).removeClass("target").addClass("source");
+        return false;
+    });
+</script>
