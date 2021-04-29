@@ -88,5 +88,14 @@ namespace FoodApp.Controllers
             _context.SaveChanges();
             return RedirectToAction("Rendelesek");
         }
+        public async Task<IActionResult> RendelesFutarraVar(int statId)
+        {
+            var stat = await _context.rendelesStatuse.FindAsync(statId);
+            stat.RenStatus = Status.FutarraVar;
+            _context.Update(stat);
+            _context.SaveChanges();
+            return RedirectToAction("Rendelesek");
+        }
+
     }
 }

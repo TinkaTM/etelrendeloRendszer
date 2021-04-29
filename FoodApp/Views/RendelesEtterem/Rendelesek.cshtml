@@ -39,7 +39,7 @@
             }
             @if (rendeles.Stat.RenStatus == Status.Accepted)
             {
-                <h5>Elfogadva</h5>
+                <a class="btn btn-danger" asp-action="RendelesFutarraVar" asp-route-statId="@rendeles.Stat.RendelesStatusId">Rendelés Kész</a>
             }
             @if (rendeles.Stat.RenStatus == Status.Declined)
             {

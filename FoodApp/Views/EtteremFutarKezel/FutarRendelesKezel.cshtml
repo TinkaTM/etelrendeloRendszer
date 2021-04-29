@@ -4,8 +4,11 @@
     ViewData["Title"] = "Futár Kezelése";
 }
 
-<div class="container testimonial-group">
-    <div id="sourcee" class="row text-center">
+<div class="container p-3 testimonial-group">
+    <div class="col text-center">
+        <h5>Kész Rendelések</h5>
+    </div>
+    <div id="sourcee" class="row p-2 text-center">
         @for (int i = 0; i < 15; i++)
         {
             <div class="col-md-3 source">
@@ -14,13 +17,13 @@
                         <p>valami</p>
                     </div>
                 </div>
-            </div>  
-         }
+            </div>
+        }
     </div>
 </div>
 <br>
 <br>
-<div class="container testimonial-group">
+<div class="container pt-3 testimonial-group">
     <div id="targete" class="row text-center">
         <div class="col-md-3">
             <div class="card">

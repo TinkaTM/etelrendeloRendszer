@@ -58,23 +58,57 @@ namespace FoodApp.Controllers
             vms.Futar = futar;
             if (etelek.Count > 0)
             {
-                Dictionary<int, List<RendelesDetail>> dict = new Dictionary<int, List<RendelesDetail>>();
-                foreach (var etel in etelek)
+                //Dictionary<int, List<RendelesDetail>> dict = new Dictionary<int, List<RendelesDetail>>();
+                //foreach (var etel in etelek)
+                //{
+                //    etel.Etlap = _context.Etlap.Find(etel.EtlapId);
+                //    if (!dict.ContainsKey(etel.RendelesId)) dict.Add(etel.RendelesId, new List<RendelesDetail>());
+                //    dict[etel.RendelesId].Add(etel);
+                //}
+                //for (int i = 0; i < 10; i++)
+                //{
+                //    foreach (var rendelesek in dict)
+                //    {
+                //        RendelesDarab rd = new RendelesDarab
+                //        {
+                //            RendelesAdatok = _context.Rendeles.Find(rendelesek.Key),
+                //            RendelesEtelek = rendelesek.Value,
+                //            Futarnal = false
+                //        };
+                //        vms.Rendelesek.Add(rd);
+                //    }
+                //}
+                HashSet<int> RendelesIds = new HashSet<int>();
+                foreach (var etel in etelek) 
                 {
                     etel.Etlap = _context.Etlap.Find(etel.EtlapId);
-                    if (!dict.ContainsKey(etel.RendelesId)) dict.Add(etel.RendelesId, new List<RendelesDetail>());
-                    dict[etel.RendelesId].Add(etel);
+                    RendelesIds.Add(etel.RendelesId);
                 }
-                for (int i = 0; i < 10; i++)
+                Dictionary<RendelesStatus, List<RendelesDetail>> dict = new Dictionary<RendelesStatus, List<RendelesDetail>>();
+                foreach (var id in RendelesIds)
                 {
-                    foreach (var rendelesek in dict)
+                    RendelesStatus stat = _context.rendelesStatuse.Where(s => s.RendelesId == id).FirstOrDefault();
+                    dict.Add(stat, new List<RendelesDetail>(etelek.FindAll(s => s.RendelesId == id)));
+                }
+                foreach(var rendeles in dict)
+                {
+                    if (rendeles.Key.FutarId == futar.FutarId) 
                     {
                         RendelesDarab rd = new RendelesDarab
                         {
-                            RendelesAdatok = _context.Rendeles.Find(rendelesek.Key),
-                            RendelesEtelek = rendelesek.Value,
+                            RendelesAdatok = _context.Rendeles.Find(rendeles.Key.RendelesId),
+                            RendelesEtelek = rendeles.Value,
+                            Futarnal = true
+                        };
+                        vms.Rendelesek.Add(rd);
+                    }
+                    else if (rendeles.Key.RenStatus == Status.FutarraVar)
+                    {
+                        RendelesDarab rd = new RendelesDarab
+                        {
+                            RendelesAdatok = _context.Rendeles.Find(rendeles.Key.RendelesId),
+                            RendelesEtelek = rendeles.Value,
                             Futarnal = false
-
                         };
                         vms.Rendelesek.Add(rd);
                     }

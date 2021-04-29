@@ -11,10 +11,10 @@ namespace FoodApp.Models
         Pending,
         Accepted,
         Declined,
-        EWaiting,
-        FWaiting,
-        FOntheway,
-        FRetry,
+        FutarraVar,
+        FutarPending,
+        FutarOntheway,
+        FutarRetry,
         Completed,
         Pickup
     }
