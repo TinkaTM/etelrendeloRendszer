@@ -9,12 +9,25 @@
         <h5>Kész Rendelések</h5>
     </div>
     <div id="sourcee" class="row p-2 text-center">
-        @for (int i = 0; i < 15; i++)
+        @foreach (var rendeles in Model.Rendelesek)
         {
             <div class="col-md-3 source">
-                <div class="card">
+                <div class="card text-left">
+                    <div class="card-header">
+                        <h5>@rendeles.RendelesAdatok.VezetekNev @rendeles.RendelesAdatok.KeresztNev</h5>
+                        <h6>@rendeles.RendelesAdatok.Iranyitoszam @rendeles.RendelesAdatok.Varos @rendeles.RendelesAdatok.Cim</h6>
+                    </div>
                     <div class="card-body">
-                        <p>valami</p>
+                        @foreach (var etel in rendeles.RendelesEtelek)
+                        {
+                            <div class="row justify-content-between">
+                                <p>@etel.Etlap.Nev x @etel.Darab</p>
+                                <p>@{int total = etel.Darab * etel.Etlap.Ar;} @total Ft </p>
+                            </div>
+                        }
+                    </div>
+                    <div class="card-footer">
+                        <p>@rendeles.RendelesAdatok.RendelesIdo</p>
                     </div>
                 </div>
             </div>
@@ -25,20 +38,6 @@
 <br>
 <div class="container pt-3 testimonial-group">
     <div id="targete" class="row text-center">
-        <div class="col-md-3">
-            <div class="card">
-                <div class="card-body">
-                    <p>valami</p>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-3">
-            <div class="card">
-                <div class="card-body">
-                    <p>valami</p>
-                </div>
-            </div>
-        </div>
     </div>
 </div>
 

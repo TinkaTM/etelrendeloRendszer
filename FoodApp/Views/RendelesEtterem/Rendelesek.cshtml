@@ -33,7 +33,7 @@
             @if (rendeles.Stat.RenStatus == Status.Pending)
             {
 
-                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">Elfogadás</button>
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#@seged">Elfogadás</button>
                 <a class="btn btn-danger" asp-action="RendelesElutasit" asp-route-statId="@rendeles.Stat.RendelesStatusId">Elutasítás</a>
 
             }
@@ -44,6 +44,13 @@
             @if (rendeles.Stat.RenStatus == Status.Declined)
             {
                 <h5>Elutasítva</h5>
+            }
+            @if (rendeles.Stat.RenStatus == Status.FutarraVar)
+            {
+        <h5>
+            A rendelés kész, válasz futárt:
+            <a class="btn btn-danger" asp-controller="EtteremFutarKezel" asp-action="FutarValaszt">Futárok</a>
+        </h5>
             }
         </div>
 
