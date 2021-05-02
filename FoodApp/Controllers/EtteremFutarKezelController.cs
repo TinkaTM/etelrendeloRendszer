@@ -92,13 +92,21 @@ namespace FoodApp.Controllers
                 }
                 foreach(var rendeles in dict)
                 {
+                    int total = 0;
+                    foreach (var etel in rendeles.Value)
+                    {
+                        int ar = etel.Etlap.Ar * etel.Darab;
+                        total = total + ar;
+                    }
                     if (rendeles.Key.FutarId == futar.FutarId) 
                     {
                         RendelesDarab rd = new RendelesDarab
                         {
                             RendelesAdatok = _context.Rendeles.Find(rendeles.Key.RendelesId),
                             RendelesEtelek = rendeles.Value,
-                            Futarnal = true
+                            Futarnal = true,
+                            RendelesTotal = total,
+                            RendekesStatId = _context.rendelesStatuse.Where(s => s.EtteremId == etteremid && s.RendelesId == rendeles.Key.RendelesId).FirstOrDefault().RendelesStatusId
                         };
                         vms.Rendelesek.Add(rd);
                     }
@@ -108,13 +116,28 @@ namespace FoodApp.Controllers
                         {
                             RendelesAdatok = _context.Rendeles.Find(rendeles.Key.RendelesId),
                             RendelesEtelek = rendeles.Value,
-                            Futarnal = false
+                            Futarnal = false,
+                            RendelesTotal = total,
+                            RendekesStatId = _context.rendelesStatuse.Where(s => s.EtteremId == etteremid && s.RendelesId == rendeles.Key.RendelesId).FirstOrDefault().RendelesStatusId
                         };
                         vms.Rendelesek.Add(rd);
                     }
                 }
             }
             return View(vms);
+        }
+        [HttpPost]
+        public IActionResult FutarRendelesFrissit(int[] Ids,int Futarid)
+        {
+            foreach(var Rendelesid in Ids)
+            {
+               var Rendelesstat = _context.rendelesStatuse.Find(Rendelesid);
+                Rendelesstat.RenStatus = Status.FutarPending;
+                Rendelesstat.FutarId = Futarid;
+                _context.Update(Rendelesstat);
+                _context.SaveChanges();
+            }
+            return RedirectToAction(nameof(FutarValaszt));
         }
     }
 }

@@ -5,51 +5,152 @@
 }
 
 <div class="container p-3 testimonial-group">
-    <div class="col text-center">
+    <div class="col mb-4 text-center">
         <h5>Kész Rendelések</h5>
+    </div>
+    <div id="EtteremUres" class="row d-none mt-3 justify-content-center">
+        <div class="col-5 p-3 mx-auto bg-secondary rounded-pill text-center">
+            <h3>Nincs Rendelés</h3>
+        </div>
     </div>
     <div id="sourcee" class="row p-2 text-center">
         @foreach (var rendeles in Model.Rendelesek)
         {
-            <div class="col-md-3 source">
-                <div class="card text-left">
-                    <div class="card-header">
-                        <h5>@rendeles.RendelesAdatok.VezetekNev @rendeles.RendelesAdatok.KeresztNev</h5>
-                        <h6>@rendeles.RendelesAdatok.Iranyitoszam @rendeles.RendelesAdatok.Varos @rendeles.RendelesAdatok.Cim</h6>
-                    </div>
-                    <div class="card-body">
-                        @foreach (var etel in rendeles.RendelesEtelek)
-                        {
-                            <div class="row justify-content-between">
-                                <p>@etel.Etlap.Nev x @etel.Darab</p>
-                                <p>@{int total = etel.Darab * etel.Etlap.Ar;} @total Ft </p>
-                            </div>
-                        }
-                    </div>
-                    <div class="card-footer">
-                        <p>@rendeles.RendelesAdatok.RendelesIdo</p>
+            @if (rendeles.Futarnal == false)
+            {
+                <div id="@rendeles.RendekesStatId" class="col-md-3 source">
+                    <div class="card text-left">
+                        <div class="card-header">
+                            <h5>@rendeles.RendelesAdatok.VezetekNev @rendeles.RendelesAdatok.KeresztNev</h5>
+                            <h6>@rendeles.RendelesAdatok.Iranyitoszam @rendeles.RendelesAdatok.Varos @rendeles.RendelesAdatok.Cim</h6>
+                        </div>
+                        <div class="card-body">
+                            @foreach (var etel in rendeles.RendelesEtelek)
+                            {
+                                <div class="row justify-content-between">
+                                    <p>@etel.Etlap.Nev x @etel.Darab</p>
+                                    <p>@{int total = etel.Darab * etel.Etlap.Ar;} @total Ft </p>
+                                </div>
+                            }
+                        </div>
+                        <div class="card-footer">
+                            <p>@rendeles.RendelesAdatok.RendelesIdo</p>
+                            <p>Összesen: @rendeles.RendelesTotal Ft</p>
+                        </div>
                     </div>
                 </div>
-            </div>
+            }
         }
     </div>
 </div>
 <br>
 <br>
 <div class="container pt-3 testimonial-group">
+    <div class="col mb-4 text-center">
+        <h5>@Model.Futar.Vezeteknev @Model.Futar.Keresztnev  Rendelései</h5>
+    </div>
+    <div id="FutarUres" class="row d-none mt-3 justify-content-center">
+        <div class="col-5 p-3 mx-auto bg-secondary rounded-pill text-center">
+            <h3>Nincs Rendelés</h3>
+        </div>
+    </div>
     <div id="targete" class="row text-center">
+        @foreach (var rendeles in Model.Rendelesek)
+        {
+            @if (rendeles.Futarnal == true)
+            {
+                <div class="col-md-3">
+                    <div class="card text-left">
+                        <div class="card-header">
+                            <h5>@rendeles.RendelesAdatok.VezetekNev @rendeles.RendelesAdatok.KeresztNev</h5>
+                            <h6>@rendeles.RendelesAdatok.Iranyitoszam @rendeles.RendelesAdatok.Varos @rendeles.RendelesAdatok.Cim</h6>
+                        </div>
+                        <div class="card-body">
+                            @foreach (var etel in rendeles.RendelesEtelek)
+                            {
+                                <div class="row justify-content-between">
+                                    <p>@etel.Etlap.Nev x @etel.Darab</p>
+                                    <p>@{int total = etel.Darab * etel.Etlap.Ar;} @total Ft </p>
+                                </div>
+                            }
+                        </div>
+                        <div class="card-footer">
+                            <p>A Rendelés a futárnál van</p>
+                        </div>
+                    </div>
+                </div>
+            }
+        }
     </div>
 </div>
-
+<br/>
+<br/>
+<div class="row justify-content-center">
+    <button id="send" type="button" class="btn btn-primary btn-lg mx-auto">Rendelések leadása</button>
+</div>
 <script>
+
+
+
+    function check()
+    {
+        if ($("#targete").children().length == 0)
+        {
+            $("#FutarUres").removeClass("d-none")
+        }
+        if ($("#sourcee").children().length == 0)
+        {
+            $("#EtteremUres").removeClass("d-none")
+        }
+    }
+    $(document).ready(check);
+
     $(document).on('click', '.col-md-3.source', function () {
         $("#targete").append(this);
+        if ($("#targete").children().length != 0)
+        {
+            $("#FutarUres").addClass("d-none")
+        }
+        if ($("#sourcee").children().length == 0)
+        {
+            $("#EtteremUres").removeClass("d-none")
+        }
         $(this).removeClass("source").addClass("target");
         return false;
     });
+
     $(document).on('click', '.col-md-3.target', function () {
         $("#sourcee").append(this);
+        if ($("#sourcee").children().length != 0)
+        {
+            $("#EtteremUres").addClass("d-none")
+        }
+        if ($("#targete").children().length == 0)
+        {
+            $("#FutarUres").removeClass("d-none")
+        }
         $(this).removeClass("target").addClass("source");
         return false;
+    });
+
+    $("#send").click(function () {
+        var idArray = [];
+        var id = @Model.Futar.FutarId;
+        $(".col-md-3.target").each(function () {
+            idArray.push(this.id);
+        });
+        $.ajax({
+            type: "POST",
+            url: "FutarRendelesFrissit",
+            data: {
+                Ids: idArray,
+                Futarid: id
+            },
+            success: function ()
+            {
+                var url = '@Url.Action("FutarValaszt", "EtteremFutarKezel" )';
+                window.location.href = url;
+            }
+        });
     });
 </script>
