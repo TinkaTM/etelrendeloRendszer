@@ -87,7 +87,7 @@ namespace FoodApp.Controllers
                 Dictionary<RendelesStatus, List<RendelesDetail>> dict = new Dictionary<RendelesStatus, List<RendelesDetail>>();
                 foreach (var id in RendelesIds)
                 {
-                    RendelesStatus stat = _context.rendelesStatuse.Where(s => s.RendelesId == id).FirstOrDefault();
+                    RendelesStatus stat = _context.rendelesStatuse.Where(s => s.RendelesId == id && s.EtteremId == etteremid).FirstOrDefault();
                     dict.Add(stat, new List<RendelesDetail>(etelek.FindAll(s => s.RendelesId == id)));
                 }
                 foreach(var rendeles in dict)
@@ -98,7 +98,7 @@ namespace FoodApp.Controllers
                         int ar = etel.Etlap.Ar * etel.Darab;
                         total = total + ar;
                     }
-                    if (rendeles.Key.FutarId == futar.FutarId) 
+                    if (rendeles.Key.FutarId == futar.FutarId ) 
                     {
                         RendelesDarab rd = new RendelesDarab
                         {
