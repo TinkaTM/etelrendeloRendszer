@@ -13,7 +13,7 @@
     model1.SegedValtozo++;
     <div class="card">
         <div class="card-header">
-            <h5>@rendeles.RendelesAdatok.VezetekNev @rendeles.RendelesAdatok.KeresztNev</h5> <small>@rendeles.RendelesAdatok.RendelesIdo</small>
+            <h5>@rendeles.RendelesAdatok.VezetekNev @rendeles.RendelesAdatok.KeresztNev</h5> <small>Rendelés ideje: @rendeles.RendelesAdatok.RendelesIdo</small>
         </div>
         <div class="card-body">
             <div class="list-group">
@@ -28,17 +28,17 @@
                             {
                                 case 0:
                                     <text>
-                                        <small>A rendelése feldolgozás alatt áll. Kérjük, várjon.</small>
+                                        <p>A rendelése feldolgozás alatt áll. Kérjük, várjon.</p>
                                     </text>
                                     break;
                                 case 1:
                                     <text>
-                                        <small>Rendelését sikeresen feldolgoztuk. Várható elkészülési idő: @allapot.Key.CompletionTime.ToString("dd/MM/yyyy HH:mm:ss")</small>
+                                        <p>Rendelését sikeresen feldolgoztuk.<br /> Várható elkészülési idő: <strong>@allapot.Key.CompletionTime.ToString("yyyy/MM/dd/ HH:mm:ss")</strong><br /></p>
                                     </text>
                                     break;
                                 case 2:
                                     <text>
-                                        <small>Rendelése sajnos elutasításra került. Elnézést kérünk a kellemetlenségért.</small>
+                                        <p>Rendelése sajnos elutasításra került. Elnézést kérünk a kellemetlenségért.</p>
                                     </text>
                                     break;
 
