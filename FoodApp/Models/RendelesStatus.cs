@@ -12,9 +12,8 @@ namespace FoodApp.Models
         Accepted,
         Declined,
         FutarraVar,
-        FutarPending,
-        FutarOntheway,
-        FutarRetry,
+        Futarnal,
+        KiszalittasAlatt,
         Completed,
         Pickup
     }

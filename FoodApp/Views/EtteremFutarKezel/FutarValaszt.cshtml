@@ -6,7 +6,7 @@
 
 @foreach (var item in Model) 
 {
-    <div class="card">
+    <div class="card m-3">
         <div class="card-header">
             <div class="d-flex justify-content-between">
                 <h5>@item.Futar.Vezeteknev @item.Futar.Keresztnev</h5>
@@ -17,6 +17,7 @@
             <p>Város: @item.Futar.Varos</p>
             <p>Telefonszám: @item.Futar.Telefonszam</p>
             <p>Munkaidő: @item.Futar.Kezdes.ToString("HH:mm") - @item.Futar.Vegzes.ToString("HH:mm")</p>
+            <p>Jelenleg @item.Rendelesek db rendelése van a futárnak</p>
         </div>
         <div class="card-footer">
             @if(item.Elerheto == true)

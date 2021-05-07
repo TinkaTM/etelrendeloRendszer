@@ -28,8 +28,9 @@ namespace FoodApp.Controllers
             foreach (var futar in Futarok)
             {
                 FutarViewModel vm = new FutarViewModel
-                    {
-                        Futar = futar
+                {
+                    Futar = futar,
+                    Rendelesek = _context.rendelesStatuse.Where(s => s.FutarId == futar.FutarId).Count()
                     };
                 TimeSpan start = futar.Kezdes.TimeOfDay;
                 TimeSpan end = futar.Vegzes.TimeOfDay;
@@ -132,7 +133,7 @@ namespace FoodApp.Controllers
             foreach(var Rendelesid in Ids)
             {
                var Rendelesstat = _context.rendelesStatuse.Find(Rendelesid);
-                Rendelesstat.RenStatus = Status.FutarPending;
+                Rendelesstat.RenStatus = Status.Futarnal;
                 Rendelesstat.FutarId = Futarid;
                 _context.Update(Rendelesstat);
                 _context.SaveChanges();
