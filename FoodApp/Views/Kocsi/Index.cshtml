@@ -32,7 +32,7 @@
                     <td class="text-right">
                         @((line.Darab * line.Etel.Ar).ToString("c"))
                     </td>
-                    <td class="text-center"><a class="btn btn-primary" asp-controller="Kocsi" asp-action="DeleteAll" asp-route-id="@line.Etel.ID">Törlés</a></td>
+                    <td class="text-center"><a class="btn btn-danger" asp-controller="Kocsi" asp-action="DeleteAll" asp-route-id="@line.Etel.ID">Törlés</a></td>
                 </tr>
             }
         </tbody>

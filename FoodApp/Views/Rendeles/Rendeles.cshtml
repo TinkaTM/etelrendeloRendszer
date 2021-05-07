@@ -2,7 +2,9 @@
 @{
     ViewData["Title"] = "Rendelés";
 }
-
+<br>
+<a asp-controller="VendegCims" asp-action="Create">Új cím létrehozása!</a>
+<br><br />
 <div class="row">
     <div class="container-fluid">
         <form asp-action="Rendeles">
@@ -15,13 +17,10 @@
                     </label>
                 }
             </div>
-            <br>
-            <a asp-controller="VendegCims" asp-action="Create">Új cím létrehozása!</a>
-            <br>
 
             <!-- Button trigger modal -->
             <br>
-            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+            <button type="button" class="btn btn-success" data-toggle="modal" data-target="#exampleModal">
                 Megrendelem!
             </button>
 
@@ -36,8 +35,8 @@
                             </button>
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Mégsem</button>
-                            <input type="submit" value="Megrendelem!" class="btn btn-primary" />
+                            <button type="button" class="btn btn-danger" data-dismiss="modal">Mégsem</button>
+                            <input type="submit" value="Megrendelem!" class="btn btn-success" />
                         </div>
                     </div>
                 </div>

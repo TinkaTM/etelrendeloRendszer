@@ -6,11 +6,11 @@
 
 <div class="container p-3 testimonial-group">
     <div class="col mb-4 text-center">
-        <h5>Kész Rendelések</h5>
+        <h5>Elkészült rendelések:</h5>
     </div>
     <div id="EtteremUres" class="row d-none mt-3 justify-content-center">
-        <div class="col-5 p-3 mx-auto bg-secondary rounded-pill text-center">
-            <h3>Nincs Rendelés</h3>
+        <div class="col-auto p-3 mx-auto bg-light rounded-pill text-center">
+            <h3>Jelenleg nincs futárra váró rendelés.</h3>
         </div>
     </div>
     <div id="sourcee" class="row p-2 text-center">
@@ -22,7 +22,7 @@
                     <div class="card text-left">
                         <div class="card-header">
                             <h5>@rendeles.RendelesAdatok.VezetekNev @rendeles.RendelesAdatok.KeresztNev</h5>
-                            <h6>@rendeles.RendelesAdatok.Iranyitoszam @rendeles.RendelesAdatok.Varos @rendeles.RendelesAdatok.Cim</h6>
+                            <small>Lakcím: @rendeles.RendelesAdatok.Iranyitoszam @rendeles.RendelesAdatok.Varos @rendeles.RendelesAdatok.Cim</small>
                         </div>
                         <div class="card-body">
                             @foreach (var etel in rendeles.RendelesEtelek)
@@ -34,8 +34,8 @@
                             }
                         </div>
                         <div class="card-footer">
-                            <p>@rendeles.RendelesAdatok.RendelesIdo</p>
-                            <p>Összesen: @rendeles.RendelesTotal Ft</p>
+                            <small>Rendelés ideje: @rendeles.RendelesAdatok.RendelesIdo</small><br />
+                            <small>Összesen: @rendeles.RendelesTotal Ft</small>
                         </div>
                     </div>
                 </div>
@@ -47,11 +47,11 @@
 <br>
 <div class="container pt-3 testimonial-group">
     <div class="col mb-4 text-center">
-        <h5>@Model.Futar.Vezeteknev @Model.Futar.Keresztnev  Rendelései</h5>
+        <h5>@Model.Futar.Vezeteknev @Model.Futar.Keresztnev hozzárendelt csomagjai:</h5>
     </div>
     <div id="FutarUres" class="row d-none mt-3 justify-content-center">
-        <div class="col-5 p-3 mx-auto bg-secondary rounded-pill text-center">
-            <h3>Nincs Rendelés</h3>
+        <div class="col-auto p-3 mx-auto bg-light rounded-pill text-center">
+            <h3>Jelenleg nincs hozzárendelt csomagja a futárnak.</h3>
         </div>
     </div>
     <div id="targete" class="row text-center">
@@ -59,7 +59,7 @@
         {
             @if (rendeles.Futarnal == true)
             {
-                <div class="col-md-3">
+                <div class="col-md-auto">
                     <div class="card text-left">
                         <div class="card-header">
                             <h5>@rendeles.RendelesAdatok.VezetekNev @rendeles.RendelesAdatok.KeresztNev</h5>
@@ -75,7 +75,7 @@
                             }
                         </div>
                         <div class="card-footer">
-                            <p>A Rendelés a futárnál van</p>
+                            <p>A rendelés a futárnál van.</p>
                         </div>
                     </div>
                 </div>
@@ -86,7 +86,7 @@
 <br />
 <br />
 <div class="row justify-content-center">
-    <button id="send" type="button" class="btn btn-primary btn-lg mx-auto">Rendelések leadása</button>
+    <button id="send" type="button" class="btn btn-success">Rendelések rögzítése</button>
 </div>
 <script>
 

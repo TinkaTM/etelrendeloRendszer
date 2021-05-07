@@ -10,7 +10,7 @@
         <div class="card-header">
             <div class="d-flex justify-content-between">
                 <h5>@item.Futar.Vezeteknev @item.Futar.Keresztnev</h5>
-                <small>@item.Futar.Jarmu</small>
+                <p>Munkajármű: @item.Futar.Jarmu</p>
             </div>
             </div>
         <div class="card-body">
@@ -22,11 +22,11 @@
         <div class="card-footer">
             @if(item.Elerheto == true)
                 {
-                    <a class="btn-primary" asp-action="FutarRendelesKezel" asp-route-Futarid="@item.Futar.FutarId">Rendekelések kezelése</a>
+                     <a class="btn btn-secondary" asp-action="FutarRendelesKezel" asp-route-Futarid="@item.Futar.FutarId">Rendelések, csomagok kezelése</a>
                 }
             else 
                 {
-                <p>A Futár épp nem Dolgozik</p>
+                <p>A futár jelenleg nem dolgozik.</p>
                 }
         </div>
         </div>

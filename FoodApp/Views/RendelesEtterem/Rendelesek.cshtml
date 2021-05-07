@@ -33,13 +33,13 @@
             @if (rendeles.Stat.RenStatus == Status.Pending)
             {
 
-                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#@seged">Elfogadás</button>
+                <button type="button" class="btn btn-success" data-toggle="modal" data-target="#@seged">Elfogadás</button>
                 <a class="btn btn-danger" asp-action="RendelesElutasit" asp-route-statId="@rendeles.Stat.RendelesStatusId">Elutasítás</a>
 
             }
             @if (rendeles.Stat.RenStatus == Status.Accepted)
             {
-                <a class="btn btn-danger" asp-action="RendelesFutarraVar" asp-route-statId="@rendeles.Stat.RendelesStatusId">Rendelés Kész</a>
+                <a class="btn btn-success" asp-action="RendelesFutarraVar" asp-route-statId="@rendeles.Stat.RendelesStatusId">Rendelés elkészült</a>
             }
             @if (rendeles.Stat.RenStatus == Status.Declined)
             {
@@ -48,8 +48,8 @@
             @if (rendeles.Stat.RenStatus == Status.FutarraVar)
             {
         <h5>
-            A rendelés kész, válasz futárt:
-            <a class="btn btn-danger" asp-controller="EtteremFutarKezel" asp-action="FutarValaszt">Futárok</a>
+            A rendelés kész, válassz futárt:
+            <a class="btn btn-secondary" asp-controller="EtteremFutarKezel" asp-action="FutarValaszt">Futárok</a>
         </h5>
             }
         </div>
@@ -70,8 +70,9 @@
                         <form method="post" asp-action="RendelesElfogad" asp-route-statId="@rendeles.Stat.RendelesStatusId" asp-route-Compdate="compdate">
                             <input class="form-control" type="time" name="compdate" />
                             <button class="btn btn-success" type="submit">Megerősítés</button>
+                            <br />
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Vissza</button>
                         </form>
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Vissza</button>
                     </div>
                 </div>
             </div>
