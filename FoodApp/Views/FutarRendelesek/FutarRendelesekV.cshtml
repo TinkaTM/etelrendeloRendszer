@@ -1,0 +1,68 @@
+﻿@model FoodApp.ViewModels.FutarRendelesViewModel
+
+
+@{
+    ViewData["Title"] = "Rendelések";
+    int seged = 1;
+}
+
+
+@foreach (var rendeles in Model.Rendelesek)
+{
+    seged++;
+    string Rendeles = "ren" + Convert.ToString(seged);
+    string Vendeg = "cim" + Convert.ToString(seged);
+    string Etterem = "ett" + Convert.ToString(seged);
+    <div class="card">
+        <div class="card-header">
+            <ul class="nav nav-tabs card-header-tabs" id="bologna-list" role="tablist">
+                <li class="nav-item">
+                    <a class="nav-link active" data-toggle="tab" href="#@Rendeles" role="tab" aria-controls="description" aria-selected="true">Rendelés</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" data-toggle="tab" href="#@Vendeg" role="tab" aria-controls="history" aria-selected="false">Vendég adatai</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" data-toggle="tab" href="#@Etterem" role="tab" aria-controls="deals" aria-selected="false">Étterem adati</a>
+                </li>
+            </ul>
+        </div>
+        <div class="card-body">
+            
+
+            <div class="tab-content">
+                <div class="tab-pane active" id="@Rendeles" role="tabpanel">
+                    <div class="card-body">
+                        <p class="card-text">Rendelése ideje: @rendeles.RendelesAdatok.RendelesIdo</p>
+                    </div>
+                    <div class="card-body">
+                        <ul class="list-group list-group-flush">
+                            @foreach (var etel in rendeles.RendelesEtelek)
+                            {
+                                <li class="list-group-item">@etel.Darab x @etel.Etlap.Nev / @{int total = etel.Darab * etel.Etlap.Ar;} @total Ft </li>
+                            }
+
+                        </ul>
+                        <div class="card-body">
+                            <p class="card-text">Összesen: @rendeles.RendelesTotal Ft</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tab-pane" id="@Vendeg" role="tabpanel" aria-labelledby="vendeg-tab">
+                    <div class="card-body">
+                        <h5> @rendeles.RendelesAdatok.VezetekNev @rendeles.RendelesAdatok.KeresztNev</h5>
+                        <p class="card-text"> Cím: @rendeles.RendelesAdatok.Iranyitoszam @rendeles.RendelesAdatok.Varos @rendeles.RendelesAdatok.Cim</p>
+                        <p class="card-text"> Telefonszám: @rendeles.RendelesAdatok.Telefonszam </p>
+                        <p class="card-text"> Email: @rendeles.RendelesAdatok.Email</p>
+                    </div>
+                </div>
+
+                <div class="tab-pane" id="@Etterem" role="tabpanel" aria-labelledby="etterem-tab">
+                 
+                </div>
+            </div>
+        </div>
+    </div>
+
+}

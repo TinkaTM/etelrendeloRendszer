@@ -132,7 +132,7 @@ namespace FoodApp.Controllers
         {
             foreach(var Rendelesid in Ids)
             {
-               var Rendelesstat = _context.rendelesStatuse.Find(Rendelesid);
+                var Rendelesstat = _context.rendelesStatuse.Find(Rendelesid);
                 Rendelesstat.RenStatus = Status.Futarnal;
                 Rendelesstat.FutarId = Futarid;
                 _context.Update(Rendelesstat);
