@@ -54,7 +54,14 @@ namespace FoodApp.Controllers
                         total = total + ar;
                     }
                     vm.RendelesTotal = total;
-                    vms.Add(vm);
+                    if ((vm.Stat.RenStatus == Status.FutarDeclined || vm.Stat.RenStatus == Status.Futarnal || vm.Stat.RenStatus == Status.FutarraVar) && vm.Stat.FutarId != null) 
+                    {
+                        vm.FutarNev = _context.FutarAdat.Find(vm.Stat.FutarId).Vezeteknev + " " + _context.FutarAdat.Find(vm.Stat.FutarId).Keresztnev;
+                    }
+                    if (vm.Stat.RenStatus != Status.Completed)
+                    {
+                        vms.Add(vm);
+                    }
                 }
             }
            
@@ -95,6 +102,54 @@ namespace FoodApp.Controllers
             _context.Update(stat);
             _context.SaveChanges();
             return RedirectToAction("Rendelesek");
+        }
+        public async Task<IActionResult> RendelesekComp()
+        {
+
+            List<RendelesEtteremViewModel> vms = new List<RendelesEtteremViewModel>();
+            var user = await _userManager.GetUserAsync(HttpContext.User);
+            var UserId = user.Id;
+            var Etterem = _context.EtteremCim.Where(s => s.UserId == UserId).FirstOrDefault();
+            if (Etterem == null) return View(vms);
+            var Etteremid = Etterem.ID;
+            var etelek = _context.RendelesDetail.Where(s => s.EtteremCimId == Etteremid).ToList();
+            if (etelek.Count > 0)
+            {
+                Dictionary<int, List<RendelesDetail>> dict = new Dictionary<int, List<RendelesDetail>>();
+                foreach (var etel in etelek)
+                {
+                    etel.Etlap = _context.Etlap.Find(etel.EtlapId);
+                    if (!dict.ContainsKey(etel.RendelesId)) dict.Add(etel.RendelesId, new List<RendelesDetail>());
+                    dict[etel.RendelesId].Add(etel);
+                }
+                foreach (var rendeles in dict)
+                {
+                    RendelesEtteremViewModel vm = new RendelesEtteremViewModel
+                    {
+                        RendelesAdatok = _context.Rendeles.Find(rendeles.Key),
+                        RendelesEtelek = rendeles.Value,
+                        Stat = _context.rendelesStatuse.Where(s => s.RendelesId == rendeles.Key && s.EtteremId == Etteremid).FirstOrDefault()
+                    };
+                    int total = 0;
+                    foreach (var etel in rendeles.Value)
+                    {
+                        int ar = etel.Etlap.Ar * etel.Darab;
+                        total = total + ar;
+                    }
+                    vm.RendelesTotal = total;
+                    if ((vm.Stat.RenStatus == Status.FutarDeclined || vm.Stat.RenStatus == Status.Futarnal || vm.Stat.RenStatus == Status.FutarraVar) && vm.Stat.FutarId != null)
+                    {
+                        vm.FutarNev = _context.FutarAdat.Find(vm.Stat.FutarId).Vezeteknev + " " + _context.FutarAdat.Find(vm.Stat.FutarId).Keresztnev;
+                    }
+                    if (vm.Stat.RenStatus == Status.Completed)
+                    {
+                        vms.Add(vm);
+                    }
+                }
+            }
+
+
+            return View(vms);
         }
 
     }

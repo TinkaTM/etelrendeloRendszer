@@ -30,7 +30,7 @@ namespace FoodApp.Controllers
                 FutarViewModel vm = new FutarViewModel
                 {
                     Futar = futar,
-                    Rendelesek = _context.rendelesStatuse.Where(s => s.FutarId == futar.FutarId).Count()
+                    Rendelesek = _context.rendelesStatuse.Where(s => s.FutarId == futar.FutarId && (s.RenStatus == Status.FutarraVar || s.RenStatus == Status.Futarnal)).Count()
                     };
                 TimeSpan start = futar.Kezdes.TimeOfDay;
                 TimeSpan end = futar.Vegzes.TimeOfDay;
@@ -88,8 +88,11 @@ namespace FoodApp.Controllers
                 Dictionary<RendelesStatus, List<RendelesDetail>> dict = new Dictionary<RendelesStatus, List<RendelesDetail>>();
                 foreach (var id in RendelesIds)
                 {
-                    RendelesStatus stat = _context.rendelesStatuse.Where(s => s.RendelesId == id && s.EtteremId == etteremid).FirstOrDefault();
+                    RendelesStatus stat = _context.rendelesStatuse.Where(s => s.RendelesId == id && s.EtteremId == etteremid && s.RenStatus != Status.Completed).FirstOrDefault();
+                    if (stat != null)
+                    { 
                     dict.Add(stat, new List<RendelesDetail>(etelek.FindAll(s => s.RendelesId == id)));
+                    }
                 }
                 foreach(var rendeles in dict)
                 {
@@ -99,7 +102,7 @@ namespace FoodApp.Controllers
                         int ar = etel.Etlap.Ar * etel.Darab;
                         total = total + ar;
                     }
-                    if (rendeles.Key.FutarId == futar.FutarId ) 
+                    if (rendeles.Key.FutarId == futar.FutarId && rendeles.Key.RenStatus != Status.FutarDeclined ) 
                     {
                         RendelesDarab rd = new RendelesDarab
                         {
@@ -111,7 +114,7 @@ namespace FoodApp.Controllers
                         };
                         vms.Rendelesek.Add(rd);
                     }
-                    else if (rendeles.Key.RenStatus == Status.FutarraVar)
+                    else if (rendeles.Key.RenStatus == Status.FutarraVar || rendeles.Key.RenStatus == Status.FutarDeclined)
                     {
                         RendelesDarab rd = new RendelesDarab
                         {
@@ -133,7 +136,7 @@ namespace FoodApp.Controllers
             foreach(var Rendelesid in Ids)
             {
                 var Rendelesstat = _context.rendelesStatuse.Find(Rendelesid);
-                Rendelesstat.RenStatus = Status.Futarnal;
+                Rendelesstat.RenStatus = Status.FutarraVar;
                 Rendelesstat.FutarId = Futarid;
                 _context.Update(Rendelesstat);
                 _context.SaveChanges();

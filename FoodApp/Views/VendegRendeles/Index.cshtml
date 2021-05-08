@@ -21,30 +21,50 @@
                 @foreach (var allapot in rendeles.RendelesEtelek)
                 {
                     { v++; }
-                    <div class="d-flex justify-content-between">
-                        <h5>@allapot.Key.Etterem.EtteremNev</h5>
-                        @{
-                            switch ((int)allapot.Key.RenStatus)
-                            {
-                                case 0:
-                                    <text>
-                                        <p>A rendelése feldolgozás alatt áll. Kérjük, várjon.</p>
-                                    </text>
-                                    break;
-                                case 1:
-                                    <text>
-                                        <p>Rendelését sikeresen feldolgoztuk.<br /> Várható elkészülési idő: <strong>@allapot.Key.CompletionTime.ToString("yyyy/MM/dd/ HH:mm:ss")</strong><br /></p>
-                                    </text>
-                                    break;
-                                case 2:
-                                    <text>
-                                        <p>Rendelése sajnos elutasításra került. Elnézést kérünk a kellemetlenségért.</p>
-                                    </text>
-                                    break;
+                <div class="d-flex justify-content-between">
+                    <h5>@allapot.Key.Etterem.EtteremNev</h5>
+                    @{
+                        switch ((int)allapot.Key.RenStatus)
+                        {
+                            case 0:
+                                <text>
+                                    <p>A rendelése feldolgozás alatt áll. Kérjük, várjon.</p>
+                                </text>
+                                break;
+                            case 1:
+                                <text>
+                                    <p>Rendelését sikeresen feldolgoztuk.<br /> Várható elkészülési idő: <strong>@allapot.Key.CompletionTime.ToString("yyyy/MM/dd/ HH:mm:ss")</strong><br /></p>
+                                </text>
+                                break;
+                            case 2:
+                                <text>
+                                    <p>Rendelése sajnos elutasításra került. Elnézést kérünk a kellemetlenségért.</p>
+                                </text>
+                                break;
+                            case 3:
+                                <text>
+                                    <p>Rendelése kész, egy futárra vár hogy felvegye.</p>
+                                </text>
+                                break;
+                            case 4:
+                                <text>
+                                    <p>Rendelése úton van önhöz. <br />  Várható érkezési idő: <strong>@allapot.Key.CompletionTime.ToString("yyyy/MM/dd/ HH:mm:ss")</strong><br /></p>
+                                </text>
+                                break;
+                            case 5:
+                                <text>
+                                    <p>Rendelés teljesítve.</p>
+                                </text>
+                                break;
+                            case 7:
+                                <text>
+                                    <p>Rendelése egy új futárra vár.</p>
+                                </text>
+                                break;
 
-                            }
                         }
-                    </div>
+                    }
+                </div>
                     @foreach (var etel in allapot.Value)
                     {
                         <div class="d-flex justify-content-between">

@@ -68,25 +68,18 @@
             </div>
         </div>
         <div class="card-footer">
-            @if (rendeles.Stat.RenStatus == Status.FutarraVar)
-            {
-                <a class="btn btn-success" asp-action="FutarRendelesElfogad" asp-route-statId="@rendeles.Stat.RendelesStatusId">Elfogadás</a>
-                <a class="btn btn-danger" asp-action="FutarRendelesElutasit" asp-route-statId="@rendeles.Stat.RendelesStatusId">Elutasítás</a>
-            }
-            @if (rendeles.Stat.RenStatus == Status.Futarnal)
-            {
-                <a class="btn btn-danger" asp-action="FutarRendelesTeljesitve" asp-route-statId="@rendeles.Stat.RendelesStatusId">Rendelés Kiszállítva</a>
-            }
+            <h5>Teljesítve.</h5>
         </div>
     </div>
-
 }
-@if (seged == 0)
-{
-    <div class="card">
-        <div class="card-header">
-            <h5>Jelenleg nincs egy kiszállítandó rendelés sem.</h5>
+@{
+    if (seged == 0)
+    {
+        <div class="card">
+            <div class="card-header">
+                <h5>Jelenleg nincs egy teljesített rendelésünk sem.</h5>
+            </div>
         </div>
-    </div>
-    <br>
+        <br>
+    }
 }
