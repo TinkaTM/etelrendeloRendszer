@@ -8,62 +8,63 @@
 <div class="img-thumbnail">
 <h1>Kosár </h1>
 <h4>Tételek a kosarában: </h4>
-<div class="row checkoutForm">
-    <table class="table table-bordered table-striped">
-        <thead>
-            <tr>
-                <th>Mennyiség</th>
-                <th>Tételek</th>
-                <th class="text-right">Ár</th>
-                <th class="text-right">Termékekre lebontva</th>
-                <th></th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var line in Model.kocsi.KocsiItems)
-            {
+<div class="container">
+    <div class="row checkoutForm">
+        <table class="table table-bordered table-striped">
+            <thead>
                 <tr>
-                    <td class="text-center">
-                        <span><a asp-controller="Kocsi" asp-action="DeleteFromKocsi" asp-route-id="@line.Etel.ID">-</a></span>
-                        <span>@line.Darab</span>
-                        <span><a asp-controller="Kocsi" asp-action="AddOnetoKocsi" asp-route-id="@line.Etel.ID">+</a></span>
-                    </td>
-                    <td class="text-left">@line.Etel.Nev</td>
-                    <td class="text-right">@line.Etel.Ar.ToString("c")</td>
-                    <td class="text-right">
-                        @((line.Darab * line.Etel.Ar).ToString("c"))
-                    </td>
-                    <td class="text-center"><a class="btn btn-danger" asp-controller="Kocsi" asp-action="DeleteAll" asp-route-id="@line.Etel.ID">Törlés</a></td>
+                    <th>Mennyiség</th>
+                    <th>Tételek</th>
+                    <th class="text-right">Ár</th>
+                    <th class="text-right">Termékekre lebontva</th>
+                    <th></th>
                 </tr>
-            }
-        </tbody>
-        <tfoot>
-            <tr>
-                <td colspan="3" class="text-right">Összesen:</td>
-                <td class="text-right">
-                    @Model.kocsiTotal.ToString("c")
-                </td>
-            </tr>
-        </tfoot>
-    </table>
+            </thead>
+            <tbody>
+                @foreach (var line in Model.kocsi.KocsiItems)
+                {
+                    <tr>
+                        <td class="text-center">
+                            <span><a asp-controller="Kocsi" asp-action="DeleteFromKocsi" asp-route-id="@line.Etel.ID">-</a></span>
+                            <span>@line.Darab</span>
+                            <span><a asp-controller="Kocsi" asp-action="AddOnetoKocsi" asp-route-id="@line.Etel.ID">+</a></span>
+                        </td>
+                        <td class="text-left">@line.Etel.Nev</td>
+                        <td class="text-right">@line.Etel.Ar.ToString("c")</td>
+                        <td class="text-right">
+                            @((line.Darab * line.Etel.Ar).ToString("c"))
+                        </td>
+                        <td class="text-center"><a class="btn btn-danger" asp-controller="Kocsi" asp-action="DeleteAll" asp-route-id="@line.Etel.ID">Törlés</a></td>
+                    </tr>
+                }
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td colspan="3" class="text-right">Összesen:</td>
+                    <td class="text-right">
+                        @Model.kocsiTotal.ToString("c")
+                    </td>
+                </tr>
+            </tfoot>
+        </table>
 
-    <div class="text-right">
-        <div class="btn-group">
-            @if (SignInManager.IsSignedIn(User))
-            {
-                <a class="btn btn-success" asp-controller="Rendeles" asp-action="Rendeles">Rendelés</a>
-            }
-            else
-            {
+        <div class="text-right">
+            <div class="btn-group">
+                @if (SignInManager.IsSignedIn(User))
+                {
+                    <a class="btn btn-success" asp-controller="Rendeles" asp-action="Rendeles">Rendelés</a>
+                }
+                else
+                {
 
-                <a class="btn btn-success" asp-controller="Rendeles" asp-action="RendelesVendeg">Rendelés vendégként</a>
+                    <a class="btn btn-success" asp-controller="Rendeles" asp-action="RendelesVendeg">Rendelés vendégként</a>
 
-            }
+                }
 
+            </div>
         </div>
     </div>
 </div>
-
 
 <br>
 <div class="@ViewBag.AlertClass fade" role="alert">
