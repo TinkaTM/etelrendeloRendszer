@@ -48,27 +48,27 @@
             @if (rendeles.Stat.RenStatus == Status.FutarraVar && rendeles.FutarNev == null)
             {
                 <h5>
-                    A rendelés kész, válassz futárt:
+                    A rendelés kész, válasszon futárt:
                     <a class="btn btn-secondary" asp-controller="EtteremFutarKezel" asp-action="FutarValaszt">Futárok</a>
                 </h5>
             }
             @if (rendeles.Stat.RenStatus == Status.FutarraVar && rendeles.FutarNev != null)
             {
                 <h5>
-                    A rendelés kész, @rendeles.FutarNev töl vár visszajelzésre.
+                    A rendelés kész, a csomag @rendeles.FutarNev visszajelzésére vár.
                 </h5>
             }
             @if (rendeles.Stat.RenStatus == Status.FutarDeclined)
             {
                 <h5>
-                    A rendelés kész, @rendeles.FutarNev Nem fogadta el a rendelést:
+                    A rendelés kész, @rendeles.FutarNev nem fogadta el a rendelést:
                     <a class="btn btn-secondary" asp-controller="EtteremFutarKezel" asp-action="FutarValaszt">Futárok</a>
                 </h5>
             }
             @if (rendeles.Stat.RenStatus == Status.Futarnal)
             {
                 <h5>
-                    A rendelés kész, @rendeles.FutarNev éppen kiszállitja a csomagot.
+                    A rendelés kész, @rendeles.FutarNev éppen kiszállítja a csomagot.
                 </h5>
             }
         </div>

@@ -17,9 +17,9 @@
 </head>
 <body>
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-danger border-bottom box-shadow mb-3">
             <div class="container">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Ételrendelő</a>
+                <a class="navbar-brand text-white" asp-area="" asp-controller="Home" asp-action="Index">Ételrendelő</a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -28,55 +28,55 @@
                     <partial name="_LoginPartial" />
                     <ul class="navbar-nav flex-grow-1">
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Kezdőképernyő</a>
+                            <a class="nav-link text-white" asp-area="" asp-controller="Home" asp-action="Index">Kezdőképernyő</a>
                         </li>
 
                         @if ((await AuthorizationService.AuthorizeAsync(User, "Étteremeknek")).Succeeded)
                         {
                             <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Etlaps" asp-action="Index">Étlap kezelés</a>
+                                <a class="nav-link text-white" asp-area="" asp-controller="Etlaps" asp-action="Index">Étlap kezelés</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="RendelesEtterem" asp-action="Rendelesek">Rendelések</a>
+                                <a class="nav-link text-white" asp-area="" asp-controller="RendelesEtterem" asp-action="Rendelesek">Rendelések</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="RendelesEtterem" asp-action="RendelesekComp">Teljesített Rendelések</a>
+                                <a class="nav-link text-white" asp-area="" asp-controller="RendelesEtterem" asp-action="RendelesekComp">Teljesített rendelések</a>
                             </li>
 
                         }
                         @if ((await AuthorizationService.AuthorizeAsync(User, "Étteremeknek")).Succeeded)
                         {
                             <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="EtteremCims" asp-action="CimKezel">Cím kezelés</a>
+                                <a class="nav-link text-white" asp-area="" asp-controller="EtteremCims" asp-action="CimKezel">Cím kezelés</a>
                             </li>
 
                         }
                         @if (!((await AuthorizationService.AuthorizeAsync(User, "Futároknak")).Succeeded || (await AuthorizationService.AuthorizeAsync(User, "Étteremeknek")).Succeeded))
                         {
                             <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Vendeg" asp-action="Index">Éttermek</a>
+                                <a class="nav-link text-white" asp-area="" asp-controller="Vendeg" asp-action="Index">Éttermek</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="VendegRendeles" asp-action="Index">Rendelések</a>
+                                <a class="nav-link text-white" asp-area="" asp-controller="VendegRendeles" asp-action="Index">Rendelések</a>
                             </li>
                             @await Component.InvokeAsync("KosarSzam")
                         }
                         @if ((await AuthorizationService.AuthorizeAsync(User, "Vendégeknek")).Succeeded)
                         {
                             <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="VendegCims" asp-action="Index">Címeim</a>
+                                <a class="nav-link text-white" asp-area="" asp-controller="VendegCims" asp-action="Index">Címeim</a>
                             </li>
                         }
                         @if ((await AuthorizationService.AuthorizeAsync(User, "Futároknak")).Succeeded)
                         {
                             <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="FutarAdats" asp-action="FutarCim">Adataim/munkaidőm</a>
+                                <a class="nav-link text-white" asp-area="" asp-controller="FutarAdats" asp-action="FutarCim">Adataim/munkaidőm</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="FutarRendelesek" asp-action="FutarRendelesekV">Rendelésiem</a>
+                                <a class="nav-link text-white" asp-area="" asp-controller="FutarRendelesek" asp-action="FutarRendelesekV">Kiszállítandó rendeléseim</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="FutarRendelesek" asp-action="FutarRendelesekComp">Teljesített Rendelésiem</a>
+                                <a class="nav-link text-white" asp-area="" asp-controller="FutarRendelesek" asp-action="FutarRendelesekComp">Teljesített rendeléseim</a>
                             </li>
                         }
                     </ul>
@@ -90,7 +90,7 @@
         </main>
     </div>
 
-    <footer class="border-top footer text-muted">
+    <footer class="border-top footer text-muted text-white">
         <div class="container">
             &copy; 2021 - FoodApp - <a asp-area="" asp-controller="Kezdőoldal" asp-action="Privacy">Privacy</a>
         </div>

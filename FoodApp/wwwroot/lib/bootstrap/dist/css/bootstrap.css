@@ -482,12 +482,13 @@ mark,
 }
 
 .img-thumbnail {
-  padding: 0.25rem;
+  padding: 2px;
   background-color: #fff;
-  border: 1px solid #dee2e6;
-  border-radius: 0.25rem;
+  border: 2px solid #dee2e6;
+  border-radius: 0.50rem;
   max-width: 100%;
   height: auto;
+  margin-left:2px;
 }
 
 .figure {
@@ -545,7 +546,8 @@ pre code {
   overflow-y: scroll;
 }
 
-.container {
+.
+{
   width: 100%;
   padding-right: 15px;
   padding-left: 15px;
@@ -4145,16 +4147,17 @@ input[type="button"].btn-block {
 }
 
 .navbar {
-  position: relative;
-  display: -ms-flexbox;
-  display: flex;
-  -ms-flex-wrap: wrap;
-  flex-wrap: wrap;
-  -ms-flex-align: center;
-  align-items: center;
-  -ms-flex-pack: justify;
-  justify-content: space-between;
-  padding: 0.5rem 1rem;
+    position: relative;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    -ms-flex-align: center;
+    align-items: center;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+    padding: 0.5rem 1rem;
+    background: #B73225;
 }
 
 .navbar > .container,
@@ -4454,11 +4457,11 @@ input[type="button"].btn-block {
 }
 
 .navbar-light .navbar-brand {
-  color: rgba(0, 0, 0, 0.9);
+    color: #B73225 !important;
 }
 
 .navbar-light .navbar-brand:hover, .navbar-light .navbar-brand:focus {
-  color: rgba(0, 0, 0, 0.9);
+  color: #B73225;
 }
 
 .navbar-light .navbar-nav .nav-link {
@@ -6547,18 +6550,21 @@ button.bg-info:focus {
   background-color: #117a8b !important;
 }
 
-.bg-warning {
-  background-color: #ffc107 !important;
+.bg-sajat {
+    background-color: #b73225 !important;
+}
+.bg-sajat {
+    background-color: #004E7C !important;
 }
 
-a.bg-warning:hover, a.bg-warning:focus,
-button.bg-warning:hover,
-button.bg-warning:focus {
-  background-color: #d39e00 !important;
+a.bg-sajat:hover, a.bg-sajat:focus,
+button.bg-sajat:hover,
+button.bg-sajat:focus {
+    background-color: #b73225 !important;
 }
 
 .bg-danger {
-  background-color: #dc3545 !important;
+    background-color: #b73225;
 }
 
 a.bg-danger:hover, a.bg-danger:focus,

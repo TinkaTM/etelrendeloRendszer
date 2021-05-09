@@ -3,60 +3,62 @@
 @{
     ViewData["Title"] = "Étlap";
 }
-<div class="@ViewBag.AlertClass fade" role="alert">
-    <h6 class="text-center">
-        <span class="glyphicon glyphicon-ok-sign"></span>
-       Termék sikeresen hozzáadva a kosárhoz!
-    </h6>
-    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-        <span aria-hidden="true">&times;</span>
-    </button>
-</div>
-<br>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                Név
-            </th>
-            <th>
-                Kategória
-            </th>
-            <th>
-                Ár
-            </th>
-            <th>
-                Allergén
-            </th>
-            <th>
-                Leírás
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model)
-        {
+<div class="img-thumbnail">
+    <div class="@ViewBag.AlertClass fade" role="alert">
+        <h6 class="text-center">
+            <span class="glyphicon glyphicon-ok-sign"></span>
+            Termék sikeresen hozzáadva a kosárhoz!
+        </h6>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <br>
+    <table class="table">
+        <thead>
             <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Nev)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Kategoria)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Ar) Ft
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Allergen)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Leiras)
-                </td>
-                <td>
-                    <a class="btn btn-success" id="cartButton" asp-controller="Kocsi" asp-action="AddToKocsi" asp-route-id="@item.ID">Kosárba</a>
-</td>
+                <th>
+                    Név
+                </th>
+                <th>
+                    Kategória
+                </th>
+                <th>
+                    Ár
+                </th>
+                <th>
+                    Allergén
+                </th>
+                <th>
+                    Leírás
+                </th>
+                <th></th>
             </tr>
-        }
-    </tbody>
-</table>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Nev)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Kategoria)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Ar) Ft
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Allergen)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Leiras)
+                    </td>
+                    <td>
+                        <a class="btn btn-success" id="cartButton" asp-controller="Kocsi" asp-action="AddToKocsi" asp-route-id="@item.ID">Kosárba</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

@@ -3,7 +3,7 @@
 @if (Model.kocsi.KocsiItems.Count > 0)
 {
     <li class="nav-item">
-        <a class="nav-link text-dark" asp-area="" asp-controller="Kocsi" asp-action="Index">
+        <a class="nav-link text-white" asp-area="" asp-controller="Kocsi" asp-action="Index">
             <span>Kosár(@Model.kocsi.KocsiItems.Count)</span>
         </a>
     </li>
@@ -11,6 +11,6 @@
 else
 {
     <li class="nav-item">
-        <a class="nav-link text-dark" asp-area="" asp-controller="Kocsi" asp-action="Index">Kosár</a>
+        <a class="nav-link text-white" asp-area="" asp-controller="Kocsi" asp-action="Index">Kosár</a>
     </li>
 }

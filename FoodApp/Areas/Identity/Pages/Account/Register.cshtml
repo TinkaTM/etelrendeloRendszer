@@ -4,13 +4,13 @@
     ViewData["Title"] = "Regisztráció";
     var roles = (List<IdentityRole>)ViewData["roles"];
 }
-
+<div class="img-thumbnail">
 <h1>@ViewData["Title"]</h1>
 
 <div class="row">
     <div class="col-md-4">
         <form asp-route-returnUrl="@Model.ReturnUrl" method="post">
-            <h4>Készíts egy új felhasználót.</h4>
+            <h4>Készítsen egy új felhasználót.</h4>
             <hr />
             <div asp-validation-summary="All" class="text-danger"></div>
             <div class="form-group">
@@ -37,7 +37,7 @@
             <button type="submit" class="btn btn-primary">Regisztráció</button>
         </form>
     </div>
-
+</div>
 
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />

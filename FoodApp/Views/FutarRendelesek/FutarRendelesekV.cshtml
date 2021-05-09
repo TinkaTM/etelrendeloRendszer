@@ -17,13 +17,13 @@
         <div class="card-header">
             <ul class="nav nav-tabs card-header-tabs" id="bologna-list" role="tablist">
                 <li class="nav-item">
-                    <a class="nav-link active" data-toggle="tab" href="#@Rendeles" role="tab" aria-controls="description" aria-selected="true">Rendelés</a>
+                    <a class="nav-link active" data-toggle="tab" href="#@Rendeles" role="tab" aria-controls="description" aria-selected="true">Rendelés adatai</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" data-toggle="tab" href="#@Vendeg" role="tab" aria-controls="history" aria-selected="false">Vendég adatai</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" data-toggle="tab" href="#@Etterem" role="tab" aria-controls="deals" aria-selected="false">Étterem adati</a>
+                    <a class="nav-link" data-toggle="tab" href="#@Etterem" role="tab" aria-controls="deals" aria-selected="false">Étterem adatai</a>
                 </li>
             </ul>
         </div>
@@ -75,7 +75,7 @@
             }
             @if (rendeles.Stat.RenStatus == Status.Futarnal)
             {
-                <a class="btn btn-danger" asp-action="FutarRendelesTeljesitve" asp-route-statId="@rendeles.Stat.RendelesStatusId">Rendelés Kiszállítva</a>
+                <a class="btn btn-success" asp-action="FutarRendelesTeljesitve" asp-route-statId="@rendeles.Stat.RendelesStatusId">Rendelés kiszállítva</a>
             }
         </div>
     </div>

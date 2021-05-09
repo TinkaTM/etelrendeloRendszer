@@ -3,69 +3,71 @@
 @{
     ViewData["Title"] = "Címeim";
 }
+<div class="img-thumbnail">
+    <h1>Címeim</h1>
 
-<h1>Címeim</h1>
-
-<p>
-    <a asp-action="Create">Új cím létrehozása!</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.VezetekNev)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.KeresztNev)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Varos)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Iranyitoszam)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Cim)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Email)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Telefonszam)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.VezetekNev)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.KeresztNev)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Varos)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Iranyitoszam)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Cim)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Email)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Telefonszam)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.VendegCimId">Módosítás</a> |
-                <a asp-action="Details" asp-route-id="@item.VendegCimId">Részletek</a> |
-                <a asp-action="Delete" asp-route-id="@item.VendegCimId">Törlés</a>
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+    <p>
+        <a asp-action="Create">Új cím létrehozása!</a>
+    </p>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.VezetekNev)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.KeresztNev)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Varos)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Iranyitoszam)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Cim)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Email)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Telefonszam)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.VezetekNev)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.KeresztNev)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Varos)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Iranyitoszam)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Cim)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Email)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Telefonszam)
+                    </td>
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@item.VendegCimId">Módosítás</a> |
+                        <a asp-action="Details" asp-route-id="@item.VendegCimId">Részletek</a> |
+                        <a asp-action="Delete" asp-route-id="@item.VendegCimId">Törlés</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
