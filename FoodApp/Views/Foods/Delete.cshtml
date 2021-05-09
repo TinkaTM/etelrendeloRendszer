@@ -3,30 +3,31 @@
 @{
     ViewData["Title"] = "Cím törlése";
 }
+<div class="img-thumbnail">
+    <h1>Cím törlése</h1>
 
-<h1>Cím törlése</h1>
+    <h3>Biztos, hogy törölni szeretné a címet?</h3>
+    <div>
+        <hr />
+        <dl class="row">
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Name)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Name)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Price)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Price)
+            </dd>
+        </dl>
 
-<h3>Biztos, hogy törölni szeretné a címet?</h3>
-<div>
-    <hr />
-    <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Name)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Name)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Price)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Price)
-        </dd>
-    </dl>
-    
-    <form asp-action="Delete">
-        <input type="hidden" asp-for="Id" />
-        <input type="submit" value="Törlés" class="btn btn-danger" /> |
-        <a asp-action="Index">Vissza a címekhez</a>
-    </form>
+        <form asp-action="Delete">
+            <input type="hidden" asp-for="Id" />
+            <input type="submit" value="Törlés" class="btn btn-danger" /> |
+            <a asp-action="Index">Vissza a címekhez</a>
+        </form>
+    </div>
 </div>

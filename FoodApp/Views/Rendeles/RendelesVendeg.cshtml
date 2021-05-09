@@ -4,75 +4,75 @@
 @{
     ViewData["Title"] = "Rendelés";
 }
+<div class="img-thumbnail">
+    <h1>Rendelés adatai<br /></h1>
+    <h5><br />Kérjük, adja meg az adatait: </h5>
+    <hr />
+    <div class="row">
+        <div class="col-md-4">
+            <form asp-action="RendelesVendeg">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-group">
+                    <label asp-for="VezetekNev" class="control-label"></label>
+                    <input asp-for="VezetekNev" class="form-control" />
+                    <span asp-validation-for="VezetekNev" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="KeresztNev" class="control-label"></label>
+                    <input asp-for="KeresztNev" class="form-control" />
+                    <span asp-validation-for="KeresztNev" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Varos" class="control-label"></label>
+                    <input asp-for="Varos" class="form-control" />
+                    <span asp-validation-for="Varos" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Iranyitoszam" class="control-label"></label>
+                    <input asp-for="Iranyitoszam" class="form-control" />
+                    <span asp-validation-for="Iranyitoszam" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Cim" class="control-label"></label>
+                    <input asp-for="Cim" class="form-control" />
+                    <span asp-validation-for="Cim" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Email" class="control-label"></label>
+                    <input asp-for="Email" class="form-control" />
+                    <span asp-validation-for="Email" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Telefonszam" class="control-label"></label>
+                    <input asp-for="Telefonszam" class="form-control" />
+                    <span asp-validation-for="Telefonszam" class="text-danger"></span>
+                </div>
+                <br>
+                <button type="button" class="btn btn-success" data-toggle="modal" data-target="#exampleModal">
+                    Megrendelem!
+                </button>
 
-<h1>Rendelés adatai<br /></h1>
-<h5><br />Kérjük, adja meg az adatait: </h5>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="RendelesVendeg">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="VezetekNev" class="control-label"></label>
-                <input asp-for="VezetekNev" class="form-control" />
-                <span asp-validation-for="VezetekNev" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="KeresztNev" class="control-label"></label>
-                <input asp-for="KeresztNev" class="form-control" />
-                <span asp-validation-for="KeresztNev" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Varos" class="control-label"></label>
-                <input asp-for="Varos" class="form-control" />
-                <span asp-validation-for="Varos" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Iranyitoszam" class="control-label"></label>
-                <input asp-for="Iranyitoszam" class="form-control" />
-                <span asp-validation-for="Iranyitoszam" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Cim" class="control-label"></label>
-                <input asp-for="Cim" class="form-control" />
-                <span asp-validation-for="Cim" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Email" class="control-label"></label>
-                <input asp-for="Email" class="form-control" />
-                <span asp-validation-for="Email" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Telefonszam" class="control-label"></label>
-                <input asp-for="Telefonszam" class="form-control" />
-                <span asp-validation-for="Telefonszam" class="text-danger"></span>
-            </div>
-            <br>
-            <button type="button" class="btn btn-succes" data-toggle="modal" data-target="#exampleModal">
-                Megrendelem!
-            </button>
-
-            <!-- Modal -->
-            <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                <div class="modal-dialog" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">Rendelés megerősítése</h5>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-danger" data-dismiss="modal">Mégsem</button>
-                            <input type="submit" value="Megrendelem!" class="btn btn-succes" />
+                <!-- Modal -->
+                <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">Rendelés megerősítése</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-danger" data-dismiss="modal">Mégsem</button>
+                                <input type="submit" value="Megrendelem!" class="btn btn-success" />
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        </form>
+            </form>
+        </div>
     </div>
 </div>
-
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }
