@@ -1,7 +1,8 @@
-﻿@model IEnumerable<FoodApp.Models.Etlap>
+﻿@model FoodApp.ViewModels.EtlapViewModel
 
 @{
     ViewData["Title"] = "Étlap";
+    int orig;
 }
 <div class="img-thumbnail">
     <div class="@ViewBag.AlertClass fade" role="alert">
@@ -14,51 +15,66 @@
         </button>
     </div>
     <br>
-    <table class="table">
-        <thead>
-            <tr>
-                <th>
-                    Név
-                </th>
-                <th>
-                    Kategória
-                </th>
-                <th>
-                    Ár
-                </th>
-                <th>
-                    Allergén
-                </th>
-                <th>
-                    Leírás
-                </th>
-                <th></th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var item in Model)
-            {
+    @foreach (var item in Model.EtlapDict)
+    {
+        <h2 class="text-center">@item.Key</h2>
+        <br />
+        <table class="table">
+            <thead>
                 <tr>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Nev)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Kategoria)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Ar) Ft
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Allergen)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Leiras)
-                    </td>
-                    <td>
-                        <a class="btn btn-success" id="cartButton" asp-controller="Kocsi" asp-action="AddToKocsi" asp-route-id="@item.ID">Kosárba</a>
-                    </td>
+                    <th>
+                        Név
+                    </th>
+                    <th>
+                        Ár
+                    </th>
+                    <th>
+                        Allergén
+                    </th>
+                    <th>
+                        Leírás
+                    </th>
+                    <th></th>
                 </tr>
-            }
-        </tbody>
-    </table>
-</div>
+            </thead>
+            <tbody>
+                @foreach (var kaja in item.Value)
+                {
+                    <tr>
+                        <td>
+                            @kaja.Nev
+                        </td>
+                        @if (kaja.Kedvezmeny == null)
+                        {
+                            <td>
+                                @kaja.Ar Ft
+                            </td>
+                        }
+                        else
+                        {
+                            {
+                                double kedv = Convert.ToDouble(kaja.Kedvezmeny);
+                                kedv = kedv / 100;
+                                kedv = 1 - kedv;
+                                kedv = kaja.Ar / kedv;
+                                orig = Convert.ToInt32(kedv);
+                            }
+                            <td>
+                                <span><del>@orig Ft </del></span><small> -@kaja.Kedvezmeny% </small><span class="text-danger">  @kaja.Ar Ft</span>
+                            </td>
+                        }
+                        <td>
+                            @kaja.Allergen
+                        </td>
+                        <td>
+                            @kaja.Leiras
+                        </td>
+                        <td>
+                            <a class="btn btn-success" id="cartButton" asp-controller="Kocsi" asp-action="AddToKocsi" asp-route-id="@kaja.ID">Kosárba</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+    </div>

@@ -1,4 +1,6 @@
 ﻿using FoodApp.Data;
+using FoodApp.Models;
+using FoodApp.ViewModels;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -27,8 +29,26 @@ namespace FoodApp.Controllers
         {
             ViewBag.AlertClass = alert;
             var userId = _context.EtteremCim.FindAsync(id).Result.UserId;
-            var etlap = await _context.Etlap.Where(etlap => etlap.UserId == userId).ToListAsync();
-            return View(etlap);
+            EtlapViewModel vm = new EtlapViewModel
+            {
+                EtlapDict = new Dictionary<string, List<Etlap>>()
+            };
+            var user = await _userManager.GetUserAsync(HttpContext.User);
+            List<Etlap> etlaps = _context.Etlap.Where(e => e.UserId == userId).ToList();
+            HashSet<string> cats = new HashSet<string>();
+            foreach (var kaja in etlaps)
+            {
+                cats.Add(kaja.Kategoria);
+            }
+            foreach (var cat in cats)
+            {
+                if (!vm.EtlapDict.ContainsKey(cat))
+                {
+                    vm.EtlapDict.Add(cat, new List<Etlap>());
+                    vm.EtlapDict[cat].AddRange(etlaps.Where(s => s.Kategoria.Equals(cat)).ToList());
+                }
+            }
+            return View(vm);
         }
     }
 }

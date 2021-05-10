@@ -23,6 +23,8 @@ namespace FoodApp.Models
         public string Allergen { get; set; }
         [DisplayName("Étel leírása: ")]
         public string Leiras { get; set; }
+        [DisplayName("Kedvezmény mértéke(%): ")]
+        public int? Kedvezmeny { get; set; }
         public string UserId { get; set; }
         [ForeignKey("UserId")]
         public virtual IdentityUser IdentityUser { get; set; }

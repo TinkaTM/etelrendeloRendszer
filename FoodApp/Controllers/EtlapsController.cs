@@ -9,6 +9,7 @@ using FoodApp.Data;
 using FoodApp.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
+using FoodApp.ViewModels;
 
 namespace FoodApp.Controllers
 {
@@ -27,20 +28,25 @@ namespace FoodApp.Controllers
         [Authorize(Roles = "Étterem,Vendég")]
         public async Task<IActionResult> Index()
         {
-            List<Etlap> Etlaps = await _context.Etlap.ToListAsync();
+            EtlapViewModel vm = new EtlapViewModel {
+                EtlapDict = new Dictionary<string, List<Etlap>>()
+            };
             var user = await _userManager.GetUserAsync(HttpContext.User);
-            if (User.IsInRole("Étterem"))
+            List<Etlap> etlaps = _context.Etlap.Where(e => e.UserId == user.Id).ToList();
+            HashSet<string> cats = new HashSet<string>();
+            foreach(var kaja in etlaps)
             {
-                Etlaps.RemoveAll(etlap =>
-                {
-                    if (etlap.IdentityUser != null)
-                    {
-                        return etlap.IdentityUser.Id != user.Id;
-                    }
-                    else return true;
-                });
+                cats.Add(kaja.Kategoria);
             }
-            return View(Etlaps);
+            foreach(var cat in cats)
+            {
+                if (!vm.EtlapDict.ContainsKey(cat))
+                {
+                    vm.EtlapDict.Add(cat, new List<Etlap>());
+                    vm.EtlapDict[cat].AddRange(etlaps.Where(s => s.Kategoria.Equals(cat)).ToList());
+                }
+            }
+            return View(vm);
         }
 
 
@@ -53,7 +59,8 @@ namespace FoodApp.Controllers
         // POST: Etlaps/SHowSearchForm
         public async Task<IActionResult> ShowSearchResults(String SearchPhrase)
         {
-            return View("Index",await _context.Etlap.Where(j=> j.Nev.Contains(SearchPhrase)).ToListAsync());
+            var user = await _userManager.GetUserAsync(HttpContext.User);
+            return View("Index",await _context.Etlap.Where(j=> (j.Nev.Contains(SearchPhrase) || j.Kategoria.Contains(SearchPhrase)) && j.UserId == user.Id).ToListAsync());
         }
 
 
@@ -87,12 +94,20 @@ namespace FoodApp.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ID,Kategoria,Nev,Ar,Allergen,Leiras")] Etlap etlap)
+        public async Task<IActionResult> Create([Bind("ID,Kategoria,Nev,Ar,Allergen,Leiras,Kedvezmeny")] Etlap etlap)
         {
             var user = await _userManager.GetUserAsync(HttpContext.User);
             if (ModelState.IsValid)
             {
                 etlap.IdentityUser = user;
+                int ujar = etlap.Ar;
+                double merteke = 0;
+                if (etlap.Kedvezmeny != null)
+                {
+                    var valami = Convert.ToDouble(etlap.Kedvezmeny);
+                    merteke = etlap.Ar * (valami / 100);
+                }
+                etlap.Ar = ujar - Convert.ToInt32(merteke);
                 _context.Add(etlap);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
@@ -121,7 +136,7 @@ namespace FoodApp.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("ID,Kategoria,Nev,Ar,Allergen,Leiras")] Etlap etlap)
+        public async Task<IActionResult> Edit(int id, [Bind("ID,Kategoria,Nev,Ar,Allergen,Leiras,Kedvezmeny")] Etlap etlap)
         {
             var user = await _userManager.GetUserAsync(HttpContext.User);
             if (id != etlap.ID)
@@ -134,6 +149,15 @@ namespace FoodApp.Controllers
                 try
                 {
                     etlap.IdentityUser = user;
+                    int ujar = etlap.Ar;
+                    double merteke = 0;
+                    if (etlap.Kedvezmeny != null) 
+                    {
+                        var valami = Convert.ToDouble(etlap.Kedvezmeny);
+                        merteke = etlap.Ar * (valami/100);
+                    }
+                    etlap.Ar = ujar - Convert.ToInt32(merteke);
+                    _context.Add(etlap);
                     _context.Update(etlap);
                     await _context.SaveChangesAsync();
                 }

@@ -1,7 +1,8 @@
-﻿@model IEnumerable<FoodApp.Models.Etlap>
+﻿@model FoodApp.ViewModels.EtlapViewModel
 
 @{
     ViewData["Title"] = "Index";
+    int orig;
 }
 <div class="img-thumbnail">
     <h1>Étlap kezelés</h1>
@@ -12,54 +13,69 @@
     <p>
         <a class="nav-link text-dark" asp-area="" asp-controller="Etlaps" asp-action="ShowSearchForm">Keresés</a>
     </p>
-
-    <table class="table">
-        <thead>
-            <tr>
-                <th>
-                    Név
-                </th>
-                <th>
-                    Kategória
-                </th>
-                <th>
-                    Ár
-                </th>
-                <th>
-                    Allergén
-                </th>
-                <th>
-                    Leírás
-                </th>
-                <th></th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var item in Model)
-            {
+    @foreach (var item in Model.EtlapDict)
+    {
+        <h2 class="text-center">@item.Key</h2>
+        <br/>
+        <table class="table">
+            <thead>
                 <tr>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Nev)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Kategoria)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Ar) Ft
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Allergen)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Leiras)
-                    </td>
-                    <td>
-                        <a asp-action="Edit" asp-route-id="@item.ID">Módosítás</a> |
-                        <a asp-action="Details" asp-route-id="@item.ID">Részletek</a> |
-                        <a asp-action="Delete" asp-route-id="@item.ID">Törlés</a>
-                    </td>
+                    <th>
+                        Név
+                    </th>
+                    <th>
+                        Ár
+                    </th>
+                    <th>
+                        Allergén
+                    </th>
+                    <th>
+                        Leírás
+                    </th>
+                    <th></th>
                 </tr>
-            }
-        </tbody>
-    </table>
+            </thead>
+
+            <tbody>
+                @foreach (var kaja in item.Value)
+                {
+                    <tr>
+                        <td>
+                            @kaja.Nev
+                        </td>
+                        @if (kaja.Kedvezmeny == null)
+                        {
+                        <td>
+                            @kaja.Ar Ft
+                        </td>
+                        }
+                        else
+                        {
+                            { double kedv = Convert.ToDouble(kaja.Kedvezmeny);
+                                kedv = kedv / 100;
+                                kedv = 1 - kedv;
+                                kedv = kaja.Ar / kedv;
+                              orig = Convert.ToInt32(kedv);
+                            }
+                        <td>
+                            <span><del>@orig Ft </del></span><small> -@kaja.Kedvezmeny% </small><span class="text-danger">  @kaja.Ar Ft</span>
+                        </td>
+                        }
+                        <td>
+                            @kaja.Allergen
+                        </td>
+                        <td>
+                            @kaja.Leiras
+                        </td>
+                        <td>
+                            <a asp-action="Edit" asp-route-id="@kaja.ID">Módosítás</a> |
+                            <a asp-action="Details" asp-route-id="@kaja.ID">Részletek</a> |
+                            <a asp-action="Delete" asp-route-id="@kaja.ID">Törlés</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+
+    }
 </div>
