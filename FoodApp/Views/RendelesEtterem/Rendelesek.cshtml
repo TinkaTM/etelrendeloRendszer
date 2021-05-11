@@ -20,15 +20,15 @@
     @if (rendeles.Stat.RenStatus == Status.PickupPeding || rendeles.Stat.RenStatus == Status.PickAccepted || rendeles.Stat.RenStatus == Status.PickupReady)
     {
         <div class="card-body">
-            <h5>Elivteles rendelés</h5>
-            <h6 class="card-title">Telefonszám: @rendeles.RendelesAdatok.Telefonszam</h6>
+            <h5>Elviteles rendelés</h5>
+            <h6 class="card-title">Telefonszám: <strong>@rendeles.RendelesAdatok.Telefonszam</strong></h6>
         </div>
     }
     else
     {
         <div class="card-body">
-            <h5>Házhoszszállítós rendelés</h5>
-            <h6 class="card-title">Cím: @rendeles.RendelesAdatok.Iranyitoszam @rendeles.RendelesAdatok.Varos @rendeles.RendelesAdatok.Cim</h6>
+            <h5>Házhozszállítós rendelés</h5>
+            <h6 class="card-title">Cím: <strong>@rendeles.RendelesAdatok.Iranyitoszam @rendeles.RendelesAdatok.Varos @rendeles.RendelesAdatok.Cim</strong></h6>
         </div>
     }
 
@@ -133,12 +133,14 @@
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <div class="modal-footer">
+                <br />
+                <div class="modal-body">
                     <form method="post" asp-action="PRendelesElfogad" asp-route-statId="@rendeles.Stat.RendelesStatusId" asp-route-Compdate="compdate">
                         <input class="form-control" type="time" name="compdate" />
-                        <button class="btn btn-success" type="submit">Megerősítés</button>
-                        <br />
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Vissza</button>
+                        <div class="modal-footer">
+                            <button class="btn btn-success" type="submit">Megerősítés</button>
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Vissza</button>
+                        </div>
                     </form>
                 </div>
             </div>
