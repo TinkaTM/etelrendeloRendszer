@@ -54,7 +54,7 @@ namespace FoodApp.Controllers
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult RendelesVendeg([Bind("RendelesId,VezetekNev,KeresztNev,Varos,Iranyitoszam,Cim,Email,Telefonszam")] Rendeles rendeles)
+        public IActionResult RendelesVendeg([Bind("RendelesId,VezetekNev,KeresztNev,Varos,Iranyitoszam,Cim,Email,Telefonszam")] Rendeles rendeles,string Pickup)
         {
             var items = _kocsi.GetKocsiItems();
             _kocsi.KocsiItems = items;
@@ -84,9 +84,16 @@ namespace FoodApp.Controllers
                     RendelesStatus stat = new RendelesStatus
                     {
                         Rendeles = rendeles,
-                        RenStatus = Status.Pending,
                         EtteremId = etterem
                     };
+                    if (Pickup.Equals("0"))
+                    {
+                        stat.RenStatus = Status.PickupPeding;
+                    }
+                    else 
+                    {
+                        stat.RenStatus = Status.Pending;
+                    }
                     _context.rendelesStatuse.Add(stat);
                     _context.SaveChanges();
                 }
@@ -97,7 +104,7 @@ namespace FoodApp.Controllers
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Rendeles(string Cimid) 
+        public IActionResult Rendeles(string Cimid,string Pickup) 
         {
             if (Cimid == null) return RedirectToAction("Index", "Vendegcims");
             var items = _kocsi.GetKocsiItems();
@@ -140,9 +147,16 @@ namespace FoodApp.Controllers
                 RendelesStatus stat = new RendelesStatus
                 {
                     Rendeles = rendeles,
-                    RenStatus = Status.Pending,
                     EtteremId = etterem
                 };
+                if (Pickup.Equals("0"))
+                {
+                    stat.RenStatus = Status.PickupPeding;
+                }
+                else
+                {
+                    stat.RenStatus = Status.Pending;
+                }
                 _context.rendelesStatuse.Add(stat);
                 _context.SaveChanges();
             }

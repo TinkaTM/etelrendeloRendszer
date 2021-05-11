@@ -4,6 +4,14 @@
 @{
     ViewData["Title"] = "Rendelés";
 }
+@{
+    var selectList = new SelectList(
+        new List<SelectListItem>
+        {
+            new SelectListItem {Text = "Házhoz Szállítás", Value = "1"},
+            new SelectListItem {Text = "Elvitelre", Value = "0"},
+                        }, "Value", "Text");
+}
 <div class="img-thumbnail">
     <h1>Rendelés adatai<br /></h1>
     <h5><br />Kérjük, adja meg az adatait: </h5>
@@ -61,6 +69,10 @@
                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                     <span aria-hidden="true">&times;</span>
                                 </button>
+                            </div>
+                            <div class="modal-body">
+                                <label>Átvétel módja:</label>
+                                <select  class="form-control" name="Pickup" asp-items="selectList"></select>
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-danger" data-dismiss="modal">Mégsem</button>

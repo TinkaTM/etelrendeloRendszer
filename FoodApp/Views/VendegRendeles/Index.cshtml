@@ -61,7 +61,23 @@
                                     <p>Rendelése egy új futárra vár.</p>
                                 </text>
                                 break;
-
+                            case 6:
+                                <text>
+                                    <p>Az Elviteles rendelése feldolgozás alatt áll. Kérjük, várjon.</p>
+                                </text>
+                                break;
+                            case 8:
+                                <text>
+                                    <p>Az Elviteles Rendelését sikeresen feldolgoztuk.<br /> Várható elkészülési idő: <strong>@allapot.Key.CompletionTime.ToString("yyyy/MM/dd/ HH:mm:ss")</strong><br /></p>
+                                </text>
+                                break;
+                            case 9:
+                                <text>
+                                    <p>Az Elviteles rendelése elkészült, kérjük vegy át az éttermünkben.<br />
+                                        (Címünk: @allapot.Key.Etterem.Varos @allapot.Key.Etterem.Cim)
+                                    </p>
+                                </text>
+                                break;
                         }
                     }
                 </div>

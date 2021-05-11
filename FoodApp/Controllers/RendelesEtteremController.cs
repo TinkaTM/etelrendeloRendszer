@@ -88,6 +88,26 @@ namespace FoodApp.Controllers
             _context.SaveChanges();
             return RedirectToAction("Rendelesek");
         }
+        
+        public async Task<IActionResult> PRendelesElfogad(int statId, DateTime Compdate)
+        {
+            var stat = await _context.rendelesStatuse.FindAsync(statId);
+            DateTime curr = DateTime.Now;
+            if (Compdate == DateTime.MinValue)
+            {
+                curr = curr.AddHours(1);
+            }
+            else
+            {
+                curr = curr.AddHours(Compdate.Hour);
+                curr = curr.AddMinutes(Compdate.Minute);
+            }
+            stat.CompletionTime = curr;
+            stat.RenStatus = Status.PickAccepted;
+            _context.Update(stat);
+            _context.SaveChanges();
+            return RedirectToAction("Rendelesek");
+        }
         public async Task<IActionResult> RendelesElutasit(int statId) {
             var stat = await _context.rendelesStatuse.FindAsync(statId);
             stat.RenStatus = Status.Declined;
@@ -99,6 +119,22 @@ namespace FoodApp.Controllers
         {
             var stat = await _context.rendelesStatuse.FindAsync(statId);
             stat.RenStatus = Status.FutarraVar;
+            _context.Update(stat);
+            _context.SaveChanges();
+            return RedirectToAction("Rendelesek");
+        }
+        public async Task<IActionResult> PRendelesReady(int statId)
+        {
+            var stat = await _context.rendelesStatuse.FindAsync(statId);
+            stat.RenStatus = Status.PickupReady;
+            _context.Update(stat);
+            _context.SaveChanges();
+            return RedirectToAction("Rendelesek");
+        }
+        public async Task<IActionResult> PRendelesDone(int statId)
+        {
+            var stat = await _context.rendelesStatuse.FindAsync(statId);
+            stat.RenStatus = Status.Completed;
             _context.Update(stat);
             _context.SaveChanges();
             return RedirectToAction("Rendelesek");

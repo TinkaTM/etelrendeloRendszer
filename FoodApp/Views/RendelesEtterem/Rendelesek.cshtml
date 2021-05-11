@@ -12,93 +12,140 @@
 {
     model1.SegedValtozo++;
     string seged = "modal" + Convert.ToString(model1.SegedValtozo);
-    <div class="card">
-        <div class="card-header">
-            <h5>@rendeles.RendelesAdatok.VezetekNev @rendeles.RendelesAdatok.KeresztNev</h5>
-        </div>
+    string seged1 = "pmodal" + Convert.ToString(model1.SegedValtozo);
+<div class="card">
+    <div class="card-header">
+        <h5>@rendeles.RendelesAdatok.VezetekNev @rendeles.RendelesAdatok.KeresztNev</h5>
+    </div>
+    @if (rendeles.Stat.RenStatus == Status.PickupPeding || rendeles.Stat.RenStatus == Status.PickAccepted || rendeles.Stat.RenStatus == Status.PickupReady)
+    {
         <div class="card-body">
-            <h6 class="card-title">@rendeles.RendelesAdatok.Iranyitoszam @rendeles.RendelesAdatok.Varos @rendeles.RendelesAdatok.Cim</h6>
+            <h5>Elivteles rendelés</h5>
+            <h6 class="card-title">Telefonszám: @rendeles.RendelesAdatok.Telefonszam</h6>
         </div>
-        <ul class="list-group list-group-flush">
-            @foreach (var etel in rendeles.RendelesEtelek)
-            {
-                <li class="list-group-item">@etel.Darab x @etel.Etlap.Nev / @{int total = etel.Darab * etel.Etlap.Ar;} @total Ft </li>
-            }
-
-        </ul>
+    }
+    else
+    {
         <div class="card-body">
-            <p class="card-text">Összesen: @rendeles.RendelesTotal Ft</p>
+            <h5>Házhoszszállítós rendelés</h5>
+            <h6 class="card-title">Cím: @rendeles.RendelesAdatok.Iranyitoszam @rendeles.RendelesAdatok.Varos @rendeles.RendelesAdatok.Cim</h6>
         </div>
-        <div class="card-footer">
-            @if (rendeles.Stat.RenStatus == Status.Pending)
-            {
+    }
 
-                <button type="button" class="btn btn-success" data-toggle="modal" data-target="#@seged">Elfogadás</button>
-                <a class="btn btn-danger" asp-action="RendelesElutasit" asp-route-statId="@rendeles.Stat.RendelesStatusId">Elutasítás</a>
+    <ul class="list-group list-group-flush">
+        @foreach (var etel in rendeles.RendelesEtelek)
+        {
+            <li class="list-group-item">@etel.Darab x @etel.Etlap.Nev / @{int total = etel.Darab * etel.Etlap.Ar;} @total Ft </li>
+        }
 
-            }
-            @if (rendeles.Stat.RenStatus == Status.Accepted)
-            {
-                <a class="btn btn-success" asp-action="RendelesFutarraVar" asp-route-statId="@rendeles.Stat.RendelesStatusId">Rendelés elkészült</a>
-            }
-            @if (rendeles.Stat.RenStatus == Status.Declined)
-            {
-                <h5>Elutasítva</h5>
-            }
-            @if (rendeles.Stat.RenStatus == Status.FutarraVar && rendeles.FutarNev == null)
-            {
-                <h5>
-                    A rendelés kész, válasszon futárt:
-                    <a class="btn btn-secondary" asp-controller="EtteremFutarKezel" asp-action="FutarValaszt">Futárok</a>
-                </h5>
-            }
-            @if (rendeles.Stat.RenStatus == Status.FutarraVar && rendeles.FutarNev != null)
-            {
-                <h5>
-                    A rendelés kész, a csomag @rendeles.FutarNev visszajelzésére vár.
-                </h5>
-            }
-            @if (rendeles.Stat.RenStatus == Status.FutarDeclined)
-            {
-                <h5>
-                    A rendelés kész, @rendeles.FutarNev nem fogadta el a rendelést:
-                    <a class="btn btn-secondary" asp-controller="EtteremFutarKezel" asp-action="FutarValaszt">Futárok</a>
-                </h5>
-            }
-            @if (rendeles.Stat.RenStatus == Status.Futarnal)
-            {
-                <h5>
-                    A rendelés kész, @rendeles.FutarNev éppen kiszállítja a csomagot.
-                </h5>
-            }
-        </div>
+    </ul>
+    <div class="card-body">
+        <p class="card-text">Összesen: @rendeles.RendelesTotal Ft</p>
+    </div>
+    <div class="card-footer">
+        @if (rendeles.Stat.RenStatus == Status.Pending )
+        {
+
+            <button type="button" class="btn btn-success" data-toggle="modal" data-target="#@seged">Elfogadás</button>
+            <a class="btn btn-danger" asp-action="RendelesElutasit" asp-route-statId="@rendeles.Stat.RendelesStatusId">Elutasítás</a>
+
+        }
+        @if (rendeles.Stat.RenStatus == Status.Accepted)
+        {
+            <a class="btn btn-success" asp-action="RendelesFutarraVar" asp-route-statId="@rendeles.Stat.RendelesStatusId">Rendelés elkészült</a>
+        }
+        @if (rendeles.Stat.RenStatus == Status.Declined)
+        {
+            <h5>Elutasítva</h5>
+        }
+        @if (rendeles.Stat.RenStatus == Status.FutarraVar && rendeles.FutarNev == null)
+        {
+            <h5>
+                A rendelés kész, válasszon futárt:
+                <a class="btn btn-secondary" asp-controller="EtteremFutarKezel" asp-action="FutarValaszt">Futárok</a>
+            </h5>
+        }
+        @if (rendeles.Stat.RenStatus == Status.FutarraVar && rendeles.FutarNev != null)
+        {
+            <h5>
+                A rendelés kész, a csomag @rendeles.FutarNev visszajelzésére vár.
+            </h5>
+        }
+        @if (rendeles.Stat.RenStatus == Status.FutarDeclined)
+        {
+            <h5>
+                A rendelés kész, @rendeles.FutarNev nem fogadta el a rendelést:
+                <a class="btn btn-secondary" asp-controller="EtteremFutarKezel" asp-action="FutarValaszt">Futárok</a>
+            </h5>
+        }
+        @if (rendeles.Stat.RenStatus == Status.Futarnal)
+        {
+            <h5>
+                A rendelés kész, @rendeles.FutarNev éppen kiszállítja a csomagot.
+            </h5>
+        }
+        @if (rendeles.Stat.RenStatus == Status.PickupPeding)
+        {
+
+            <button type="button" class="btn btn-success" data-toggle="modal" data-target="#@seged1">Elfogadás</button>
+            <a class="btn btn-danger" asp-action="RendelesElutasit" asp-route-statId="@rendeles.Stat.RendelesStatusId">Elutasítás</a>
+
+        }
+        @if (rendeles.Stat.RenStatus == Status.PickAccepted)
+        {
+            <a class="btn btn-success" asp-action="PRendelesReady" asp-route-statId="@rendeles.Stat.RendelesStatusId">Rendelés elkészült</a>
+        }
+        @if (rendeles.Stat.RenStatus == Status.PickupReady)
+        {
+            <a class="btn btn-success" asp-action="PRendelesDone" asp-route-statId="@rendeles.Stat.RendelesStatusId">Átadva</a>
+        }
+    </div>
 
 
 
-        <!-- Modal -->
-        <div class="modal fade" id="@seged" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Rendelés elkészülési ideje: </h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Mégsem">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <div class="modal-footer">
-                        <form method="post" asp-action="RendelesElfogad" asp-route-statId="@rendeles.Stat.RendelesStatusId" asp-route-Compdate="compdate">
-                            <input class="form-control" type="time" name="compdate" />
-                            <button class="btn btn-success" type="submit">Megerősítés</button>
-                            <br />
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Vissza</button>
-                        </form>
-                    </div>
+    <!-- Modal -->
+    <div class="modal fade" id="@seged" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Rendelés elkészülési ideje: </h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Mégsem">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-footer">
+                    <form method="post" asp-action="RendelesElfogad" asp-route-statId="@rendeles.Stat.RendelesStatusId" asp-route-Compdate="compdate">
+                        <input class="form-control" type="time" name="compdate" />
+                        <button class="btn btn-success" type="submit">Megerősítés</button>
+                        <br />
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Vissza</button>
+                    </form>
                 </div>
             </div>
         </div>
-
-
     </div>
+    <div class="modal fade" id="@seged1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Rendelés elkészülési ideje: </h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Mégsem">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-footer">
+                    <form method="post" asp-action="PRendelesElfogad" asp-route-statId="@rendeles.Stat.RendelesStatusId" asp-route-Compdate="compdate">
+                        <input class="form-control" type="time" name="compdate" />
+                        <button class="btn btn-success" type="submit">Megerősítés</button>
+                        <br />
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Vissza</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
     <br>
 }
 @{

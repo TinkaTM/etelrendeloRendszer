@@ -2,6 +2,14 @@
 @{
     ViewData["Title"] = "Rendelés";
 }
+@{
+    var selectList = new SelectList(
+        new List<SelectListItem>
+        {
+            new SelectListItem {Text = "Házhoz Szállítás", Value = "1"},
+            new SelectListItem {Text = "Elvitelre", Value = "0"},
+                                }, "Value", "Text");
+}
 <br>
 <div class="img-thumbnail">
     <a asp-controller="VendegCims" asp-action="Create">Új cím létrehozása!</a>
@@ -33,6 +41,10 @@
                                 <button type="button" class="close" data-dismiss="modal" aria-label="Mégsem">
                                     <span aria-hidden="true">&times;</span>
                                 </button>
+                            </div>
+                            <div class="modal-body">
+                                <label>Átvétel módja:</label>
+                                <select class="form-control" name="Pickup" asp-items="selectList"></select>
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-danger" data-dismiss="modal">Mégsem</button>

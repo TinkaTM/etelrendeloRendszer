@@ -14,8 +14,10 @@ namespace FoodApp.Models
         FutarraVar,
         Futarnal,
         Completed,
-        Pickup,
-        FutarDeclined
+        PickupPeding,
+        FutarDeclined,
+        PickAccepted,
+        PickupReady
     }
     public class RendelesStatus
     {

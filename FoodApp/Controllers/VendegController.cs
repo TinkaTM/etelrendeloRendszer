@@ -28,10 +28,12 @@ namespace FoodApp.Controllers
         public async Task<IActionResult> Etlap(int id, string alert)
         {
             ViewBag.AlertClass = alert;
+            string nev = _context.EtteremCim.FindAsync(id).Result.EtteremNev;
             var userId = _context.EtteremCim.FindAsync(id).Result.UserId;
             EtlapViewModel vm = new EtlapViewModel
             {
-                EtlapDict = new Dictionary<string, List<Etlap>>()
+                EtlapDict = new Dictionary<string, List<Etlap>>(),
+                Etteremnev = nev
             };
             var user = await _userManager.GetUserAsync(HttpContext.User);
             List<Etlap> etlaps = _context.Etlap.Where(e => e.UserId == userId).ToList();
