@@ -1,22 +1,23 @@
-﻿
-<h4>Keresés</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="ShowSearchResults">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label name="SearchPhrase" class="control-label"></label>
-                Név:
-                <input name="SearchPhrase" class="form-control" />
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Keresés" class="btn btn-primary" />
-            </div>
-        </form>
+﻿<div class="img-thumbnail">
+    <h4>Keresés</h4>
+    <hr />
+    <div class="row">
+        <div class="col-md-4">
+            <form asp-action="ShowSearchResults">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-group">
+                    <label name="SearchPhrase" class="control-label"></label>
+                    Név:
+                    <input name="SearchPhrase" class="form-control" />
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="Keresés" class="btn btn-primary" />
+                </div>
+            </form>
+        </div>
     </div>
-</div>
 
-<div>
-    <a asp-action="Index">Vissza az ételekhez</a>
+    <div>
+        <a asp-action="Index">Vissza az ételekhez</a>
+    </div>
 </div>

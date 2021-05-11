@@ -3,45 +3,46 @@
 @{
     ViewData["Title"] = "Details";
 }
+<div class="img-thumbnail">
+    <h1>Részletek</h1>
 
-<h1>Részletek</h1>
-
-<div>
-    <hr />
-    <dl class="row">
-        <dt class = "col-sm-2">
-            Kategória
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Kategoria)
-        </dd>
-        <dt class = "col-sm-2">
-            Név
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Nev)
-        </dd>
-        <dt class = "col-sm-2">
-            Ár
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Ar) Ft
-        </dd>
-        <dt class = "col-sm-2">
-            Allergén
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Allergen)
-        </dd>
-        <dt class = "col-sm-2">
-            Leírás
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Leiras)
-        </dd>
-    </dl>
-</div>
-<div>
-    <a asp-action="Edit" asp-route-id="@Model.ID">Módosítás</a> |
-    <a asp-action="Index">Vissza az ételekhez</a>
+    <div>
+        <hr />
+        <dl class="row">
+            <dt class="col-sm-2">
+                Kategória
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Kategoria)
+            </dd>
+            <dt class="col-sm-2">
+                Név
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Nev)
+            </dd>
+            <dt class="col-sm-2">
+                Ár
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Ar) Ft
+            </dd>
+            <dt class="col-sm-2">
+                Allergén
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Allergen)
+            </dd>
+            <dt class="col-sm-2">
+                Leírás
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Leiras)
+            </dd>
+        </dl>
+    </div>
+    <div>
+        <a asp-action="Edit" asp-route-id="@Model.ID">Módosítás</a> |
+        <a asp-action="Index">Vissza az ételekhez</a>
+    </div>
 </div>
